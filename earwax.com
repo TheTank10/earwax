@@ -421,23 +421,27 @@ local Hitboxsize = 10
 function extendHitbox(target, size)
     local hrp = target.Character:WaitForChild("HumanoidRootPart")
     hrp.Size = Vector3.new(size, size, size)
-    local selectionBox = Instance.new("SelectionBox")
-    selectionBox.Adornee = hrp 
-    selectionBox.Parent = hrp 
-
-    local element = target:WaitForChild("PlayerData"):WaitForChild("Appearance"):WaitForChild("Elements").Value 
     
-    if element == "Fire" then 
-       selectionBox.Color3 = Color3.new(255,0,0)
-    elseif element == "Earth" then 
-        selectionBox.Color3 = Color3.new(0, 255, 0)
-    elseif element == "Water" then 
-        selectionBox.Color3 = Color3.new(0, 0, 255)
-    elseif element == "Air" then 
-        selectionBox.Color3 = Color3.new(255,255,255)
-    else
-        selectionBox.Color3 = Color3.new(0,0,0)
-    end
+    if not hrp:FindFirstChild("xuz") then
+        local selectionBox = Instance.new("SelectionBox")
+        selectionBox.Adornee = hrp 
+        selectionBox.Parent = hrp 
+        selectionBox.Name = "xuz"
+    
+        local element = target:WaitForChild("PlayerData"):WaitForChild("Appearance"):WaitForChild("Elements").Value 
+        
+        if element == "Fire" then 
+           selectionBox.Color3 = Color3.new(255,0,0)
+        elseif element == "Earth" then 
+            selectionBox.Color3 = Color3.new(0, 255, 0)
+        elseif element == "Water" then 
+            selectionBox.Color3 = Color3.new(0, 0, 255)
+        elseif element == "Air" then 
+            selectionBox.Color3 = Color3.new(255,255,255)
+        else
+            selectionBox.Color3 = Color3.new(0,0,0)
+        end
+    end 
     
     hrp.CanCollide = false
     local mouse = player:GetMouse()
