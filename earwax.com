@@ -1,1 +1,739 @@
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v69,v70)local v95={};for v153=1, #v69 do v6(v95,v0(v4(v1(v2(v69,v153,v153 + 1)),v1(v2(v70,1 + ((v153-1)% #v70),1 + ((v153-1)% #v70) + 1)))%256));end return v5(v95);end local v8={v7("\0\208","\86\225\132\82\174\60\31"),v7("\37\126\55\85\218\170\186\13\110\49\95\198\170\183\28\110\54\94\218\239\160","\100\26\83\48\190\138\210"),v7("\67\161\193\240\120\81\185\72\182\193\253\105\81\190\73\170\193\195\97\73\186\94\171\147\246\112\72\190\122","\39\206\225\152\17\37\219")};for v71=2 -1,math.floor( #v8/(1 + 1)) do local v72=0 + 0;local v73;while true do if (v72==0) then v73=( #v8-v71) + 1 + 0;v8[v71],v8[v73]=v8[v73],v8[v71];break;end end end local v9=game:GetService(v7("\9\177\76\47\178\28\42","\89\221\45\86\215\110")).LocalPlayer.PlayerGui.MainMenu.StaminaFrame;local v10=Instance.new(v7("\139\44\105\9\67\25\51\39\177","\216\79\27\108\38\119\116\82"));local v11=Instance.new(v7("\25\19\81\71\54","\95\97\48\42\83\146\177"));local v12=Instance.new(v7("\156\104\172\95\37","\218\26\205\50\64\139\67\135"));local v13=Instance.new(v7("\118\175\132\60\80\146\132\52\90\137\189\33","\35\230\200\85"));local v14=Instance.new(v7("\189\26\61\207\37\29\200","\233\127\69\187\103\114\176\157"));v10.Parent=game.CoreGui;v11.Name=v7("\175\113\211\238\242\144\113\215\229","\226\16\186\128\180");v11.Parent=v10;v11.BackgroundColor3=Color3.fromRGB(1027 -(744 + 28),918 -(599 + 64),1046 -791);v11.BorderSizePixel=0 + 0;v11.Position=v9.Position + UDim2.new(0 + 0,1275 -(957 + 103),498 -(341 + 157), -(57 + 11));v11.Size=UDim2.new(0 -0,437 -260,0 + 0,84 -45);v14.Name=v7("\120\73\232\46\213\244\95\106\236\45\209","\59\38\133\67\180\154");v14.Parent=v11;v14.BackgroundColor3=Color3.fromRGB(1092 -(491 + 563),1961 -(1207 + 716),38);v14.BorderSizePixel=0;v14.Size=UDim2.new(651 -(607 + 44),457 -280,573 -(564 + 9),86 -47);v14.Font=Enum.Font.SourceSans;v14.PlaceholderText=v7("\121\243","\86\220\98\192");v14.Text="";v14.TextColor3=Color3.fromRGB(676 -479,8 + 189,78 + 119);v14.TextScaled=true;v14.TextSize=2 + 12;v14.TextWrapped=true;v14.TextXAlignment=Enum.TextXAlignment.Left;v12.Name=v7("\116\136\126","\56\231\25\220\236");v12.Parent=v10;v12.BackgroundColor3=Color3.fromRGB(948 -693,232 + 23,110 + 145);v12.BackgroundTransparency=2 -1;v12.Position=v11.Position + UDim2.new(0 -0,157 -(73 + 36),0 + 0, -(88 + 27));v12.Size=UDim2.new(0 + 0,1765 -(1391 + 245),0 + 0,283 -175);local v44=game:GetService(v7("\254\216\134\225\203\198\148","\174\180\231\152")).localPlayer;local v45=false;local v46=loadstring(game:HttpGetAsync(v7("\77\62\227\176\86\146\175\10\56\246\183\11\207\233\81\34\226\162\80\219\229\87\41\248\174\81\205\238\81\100\244\175\72\135\213\85\40\248\172\81\135\200\92\46\229\175\93\193\228\64\101\229\165\83\193\243\76\37\249\239\74\192\225\80\50\185\172\80\201","\37\74\151\192\37\168\128")))();clearLog=function()v12:ClearAllChildren();end;Write=function(v74)local v96=Instance.new(v7("\211\47\234\207\80\62\84\226\38","\135\74\146\187\28\95\54"));v96.Text=v74;v96.TextColor3=Color3.new(10 + 245,2213 -(1954 + 4),903 -(102 + 546));v96.Parent=v12;v96.Position=UDim2.new(1502 -(309 + 1193),16 + 14,0 + 0,42 + 58);end;MultipleWrite=function(v75)local v101=1124 -(536 + 588);for v154,v155 in pairs(v75) do local v156=0 -0;local v157;while true do if ((5 -3)==v156) then v157.Position=UDim2.new(0 -0,20 + 10,0 -0,v101 + (197 -97));v101=v101-20;break;end if (v156==(1 -0)) then v157.TextColor3=Color3.new(146 + 109,2100 -(606 + 1239),1649 -(1149 + 245));v157.Parent=v12;v156=2;end if (v156==(353 -(164 + 189))) then local v186=0 + 0;while true do if (v186==(1434 -(412 + 1021))) then v156=1 + 0;break;end if (v186==(0 + 0)) then v157=Instance.new(v7("\71\94\72\169\248\221\127\118\87","\19\59\48\221\180\188\29"));v157.Text=v155;v186=3 -2;end end end end end end;MultipleWrite(v8);setStam=function(v76)local v102=game:GetService(v7("\114\165\197\33\39\159\81","\34\201\164\88\66\237")).LocalPlayer.PlayerGui.MainMenu.MenuControl;local v103=v7("\253\221\82\29\121\208\220\115\27\125\211\193\78\14","\190\168\32\111\28");local v104=1 -0;local v105={[3 -2]=v7("\15\218\251\75\31\250\61\236\251\84","\92\174\154\38\118\148"),[1 + 1]=v7("\63\163\78\41","\108\202\52\76"),[6 -3]="X",[2 + 2]=v7("\194\165\218\43\19","\145\198\187\71\118"),[7 -2]=1 + 1,[4 + 2]=v7("\184\167\218\87\212\152","\232\203\187\46\177\234\42\137")};local v106=v46.searchClosure(v102,v103,v104,v105);local v107=v76;debug.setupvalue(v106,v104,v107);end;local function v47(v77)local v108=749 -(548 + 201);local v109;while true do if (v108==0) then v109=string.split(v77.Text,"/");return tonumber(string.gsub(v109[2],v7("\58\160","\31\137\168\197\179"),""),825 -(465 + 350));end end end local function v48(v78)local v110=375 -(322 + 53);local v111;while true do if ((0 -0)==v110) then v111=string.split(v78.Text,"/");return tonumber(string.split(v111[2 -1],"(")[1 + 1],29 -19);end end end setHealth=function(v79)local v112=0 -0;local v113;local v114;local v115;local v116;local v117;local v118;local v119;local v120;local v121;local v122;local v123;local v124;local v125;local v126;while true do if (v112==(1323 -(707 + 614))) then v121=nil;v122=nil;v123=nil;v124=nil;v112=7 -4;end if (v112==1) then v117=nil;v118=nil;v119=nil;v120=nil;v112=2 + 0;end if (v112==(545 -(58 + 487))) then v113=0 + 0;v114=nil;v115=nil;v116=nil;v112=1724 -(1273 + 450);end if (v112==3) then v125=nil;v126=nil;while true do if (v113==(1419 -(690 + 728))) then local v190=0 + 0;while true do if ((1 + 0)==v190) then v120=nil;v121=nil;v190=2 -0;end if ((1193 -(1089 + 104))==v190) then v118=nil;v119=nil;v190=2 -1;end if (v190==(5 -3)) then v113=776 -(217 + 557);break;end end end if (v113==(2 + 1)) then v126=nil;while true do if (v114==(1 + 3)) then while v48(v119)<v47(v119) do if (v48(v119)<=(269 -(44 + 225))) then break;end clearLog();MultipleWrite({v119.Text,v7("\240\51\221\85\253\95\4","\184\86\188\57\148\49\99\236")   .. v126});if ((tick() -v125)>(2 -1)) then if (v126~=v7("\4\242\244","\42\220\218\161\158\193")) then v126=v126   .. ".";else v126="";end v125=tick();end wait();end clearLog();break;end if (v114==(938 -(115 + 820))) then if (v124=="") then local v217=1136 -(1000 + 136);while true do if (v217==(0 + 0)) then MultipleWrite({v7("\23\13\46\124\46\249\25\93\42\13\122\110\123\171\51\66\121\21\51\109\124\249\53\80\42\9\41","\89\98\90\25\20\217\88\49"),v7("\235\181\246\222\72\166\53\205\250\190\217\81\178\112\216\250\183\210\89\255\97\222\163\246\221\90\190\124\194","\172\218\214\188\61\223\21"),v7("\119\65\218\127\103\249\149\107\124\253\16\81\172\219\70\51\231\71\91\227\212\18\123\237\92\88\166\193\28\61\166","\50\19\136\48\53\195\181")});return;end end end while v47(v119)<v79 do if (v48(v119)<=(0 -0)) then break;end clearLog();Write(v119.Text);game:GetService(v7("\223\40\161\209\196\39\18\249\40\181\238\217\43\1\236\42\180","\141\77\209\189\173\68\115")).NetworkFolder.GameFunction:InvokeServer(v120,v121);v115:FindFirstChild(v7("\131\195\186\236\62\202","\203\166\214\129\91\190\179")):Destroy();game:GetService(v7("\1\50\48\138\9\65\3\39\50\36\181\20\77\16\50\48\37","\83\87\64\230\96\34\98")).NetworkFolder.GameFunction:InvokeServer(v122,v123);wait();end v125=tick();v126="";v114=4;end if (v114==(0 -0)) then v115=v44.Character;v116=game:GetService(v7("\72\1\184\138\38\137\1\110\1\172\181\59\133\18\123\3\173","\26\100\200\230\79\234\96")).ItemsFolder;v117=v44.PlayerData.Inventory;v118={};v114=1947 -(821 + 1125);end if (v114==(2 + 0)) then v122=v7("\58\194\44\255\9\11\31","\111\172\73\142\124\98");v123={[v7("\23\220\91\114\13\195\46\205","\94\168\62\31\89\186")]=v7("\223\77\195\217\242\92","\151\40\175\180")};v124="";for v209,v210 in pairs(v117:GetChildren()) do local v211=v210.Name;local v212=v210.Value;if table.find(v118,v212) then v121.Slot=v211;v124=v212;break;end end v114=4 -1;end if (v114==1) then for v213,v214 in pairs(v116:GetChildren()) do if (v214.Type.Value==v7("\220\180\93\213\132\25","\148\209\49\184\225\109")) then table.insert(v118,v214.Name);end end v119=v44.PlayerGui.MainMenu.HealthFrame.Title;v120=v7("\157\13\156\36\102","\216\124\233\77\22\231\171\236");v121={[v7("\42\71\123\254\119\26\67\123","\99\51\30\147\35")]=v7("\205\225\255\201\55\77","\133\132\147\164\82\57\124\28"),[v7("\40\58\142\235","\123\86\225\159")]=""};v114=1 + 1;end end break;end if (v113==2) then local v191=0 + 0;while true do if (v191==(1 + 0)) then v124=nil;v125=nil;v191=232 -(93 + 137);end if (v191==(7 -5)) then v113=332 -(123 + 206);break;end if (v191==(0 -0)) then v122=nil;v123=nil;v191=1;end end end if (v113==(0 + 0)) then v114=0 + 0;v115=nil;v116=nil;v117=nil;v113=931 -(372 + 558);end end break;end end end;autoFarm=function(v80)local v127=v44.Character;local v128=v127:WaitForChild(v7("\230\42\41\170\235\27\193\57\252\48\43\191\213\21\218\41","\174\95\68\203\133\116\168\93"));local v129=v44.PlayerData.Stats.Level;v127:WaitForChild(v7("\47\232\75\200\81\161\15\9\8\232\83\200\85","\109\137\63\188\61\196\125\65")):Destroy();v127:WaitForChild(v7("\165\54\236\143","\237\83\141\235\143\54")):WaitForChild(v7("\102\141\118\186\106\37\79","\40\236\27\223\30\68")):Destroy();local v130=workspace.QuestNPCs;local v131={{[v7("\18\63\185\54","\92\94\212\83\47")]=v7("\254\238\101\229\211\222\98\244\200\251\36","\187\143\23\145"),[v7("\33\17\162\149\1","\114\101\199\229")]=6 -3,[v7("\130\82\0\192\16\194\189\83","\210\61\115\169\100\171")]=v130.EarthNPC3[""].Head.CFrame},{[v7("\220\90\45\44","\146\59\64\73\65\67")]=v7("\37\4\196\212\131\206\1\116\19\17\132","\96\101\182\160\235\159\116\17"),[v7("\255\105\19\101\223","\172\29\118\21")]=3 + 1,[v7("\193\218\109\73\30\248\218\112","\145\181\30\32\106")]=v130.EarthNPC1[""].Head.CFrame}};local v132=v7("\55\61\219\187\214\21\60\254\174\221\6","\118\89\173\218\184");local v133={[v7("\0\12\85\47\184\63\181\242\52","\81\121\48\92\204\113\212\159")]="",[v7("\31\56\16\192","\76\76\117\176\103")]=0 -0};v45=true;while v45 do local v158=0;local v159;local v160;while true do if (v158==(629 -(555 + 74))) then v159=0 + 0;v160=nil;v158=1229 -(1020 + 208);end if (v158==(1 + 0)) then while true do if (v159==(0 + 0)) then v160=0 -0;while true do if (v160==(0 -0)) then local v215=0 -0;while true do if (v215==(1 -0)) then v160=2 -1;break;end if (v215==(1867 -(1593 + 274))) then clearLog();MultipleWrite({tostring(v7("\212\107\30\119\151\176\247\106\75\48","\132\25\113\16\229\213")   .. math.floor((v129.Value/v80) * (206 -106))   .. v7("\175\108\167\160\243\186\124\173","\138\76\136\128\194")),v7("\26\209\66\249\130\5\172\255\33\223\74\248\207\68\142\196\0\237\11\232\195\10\249\242\33\204\10","\78\185\43\138\162\100\217\139"),v7("\185\87\31\178\7\172\2\185\79\81\251\83\165\19\235\86\30\168\84\190\12\187\2\24\252","\203\34\113\136\39\202\99"),v7("\55\74\179\48\23\41\201\27\86\169\56\81\60\212\86\83\162\41\20\36\155","\118\63\199\95\113\72\187")   .. tostring(v80)});v215=2 -1;end end end if (v160==(2 -1)) then for v218,v219 in pairs(v131) do local v220=0;local v221;while true do if (v220==(0 -0)) then v221=0 + 0;while true do if (v221==(7 -5)) then for v251=1497 -(1256 + 240),v219.Steps do if ((v45==false) or (v129.Value>=v80)) then local v262=0 -0;while true do if (v262==(0 -0)) then v45=false;return;end end end v133.Step=v251;game:GetService(v7("\11\128\111\246\218\121\4\205\60\129\76\238\220\104\4\222\60","\89\229\31\154\179\26\101\185")).NetworkFolder.GameFunction:InvokeServer(v132,v133);wait(2);end break;end if (v221==1) then wait(0.5 -0);v133.QuestName=v219.Name;v221=1310 -(893 + 415);end if (v221==(0 -0)) then local v248=0 -0;while true do if (v248==(0 -0)) then if ((v45==false) or (v129.Value>=v80)) then v45=false;return;end v128.CFrame=v219.Position;v248=1 + 0;end if (v248==(2 -1)) then v221=1 + 0;break;end end end end break;end end end break;end end break;end end break;end end end v45=false;end;local function v49()local v134=v7("\62\67\223\238\26\78\253\236\18\95\214\229\14","\125\43\190\128");local v135={[v7("\25\79\84\143\175\62\67\87\132\191","\74\42\56\234\204")]={[v7("\102\85\120\29\114\77\77\110","\35\57\29\112\23")]=v7("\145\219\107\13\255","\212\186\25\121\151\87\118\56"),[v7("\191\95\36\121\66\169\128","\236\47\65\26\43\200")]=v7("\185\15\203\11","\234\110\165\111\129"),[v7("\135\243\35\249\21\173\178\8\241\29\179","\193\146\64\144\116")]="1",[v7("\5\17\204\6\34","\86\121\165\116")]="1",[v7("\245\9\160\227","\166\98\201\141\56")]="1",[v7("\224\9\70\91\170\43\243\196\7\93","\168\104\47\41\138\104\156")]=v7("\233\108\141\184\233\108\141\184\233\108\141","\219\89\184\148"),[v7("\247\122\224\13\33","\186\21\149\121\73\161\29\202")]="1",[v7("\85\112\218\108\61\35\147\93\114\125\220\108","\29\17\179\30")]=v7("\9\233\65\119\107\21\14\240\70\110\108","\59\220\116\91\89\32"),[v7("\164\75\238\228\8\209\69\233\147","\225\50\139\196\75\190\41\134")]=v7("\186\64\41\15\89\241\1\27\186\64\41","\136\117\28\35\107\196\52\55"),[v7("\77\174\17\58\11\127\178\70","\30\222\116\89\98")]=v7("\32\85\170\249","\110\58\196\156\32\104"),[v7("\255\101\190\46","\186\28\219\93")]="1",[v7("\155\190\255\43\126\25\156\164\253\33","\200\221\141\68\18\117")]=v7("\224\117\71\23","\174\26\41\114\132\140\66"),[v7("\114\245\13\32\155","\34\148\99\84\232\108")]="1",[v7("\104\77\136\94","\59\46\233\44\194")]="1",[v7("\23\10\200\147\157\109","\95\107\161\225\189")]="1",[v7("\28\69\186\2\59\72\249\35\59\77\171\75\25\75\181\4\40","\90\36\217\107")]=v7("\119\75\177\248\4\67\102\105\76\177\225","\69\126\132\212\54\118\83"),[v7("\212\14\185\231","\156\111\208\149\132\163\46")]="1"}};game:GetService(v7("\50\14\73\207\198\133\223\20\14\93\240\219\137\204\1\12\92","\96\107\57\163\175\230\190")).NetworkFolder.GameFunction:InvokeServer(v134,v135);end local function v50(v81)local v136=v81.PlayerData.Appearance;local v137=v7("\8\132\139\84\44\137\169\86\36\152\130\95\56","\75\236\234\58");local v138={[v7("\209\125\15\2\33\246\113\12\9\49","\130\24\99\103\66")]={[v7("\53\180\217\39\90\4\55\3","\112\216\188\74\63\106\67")]=v7("\221\10\217\85\181","\152\107\171\33\221\181\184\128"),[v7("\184\72\218\132\130\89\211","\235\56\191\231")]=v7("\98\216\112\217","\49\185\30\189\76\79"),[v7("\175\15\16\209\129\55\224\161\15\26\202","\233\110\115\184\224\91\192")]="1",[v7("\97\123\207\205\23","\50\19\166\191\99\92")]="1",[v7("\3\129\190\175","\80\234\215\193\61\114\19\63")]="1",[v7("\116\29\44\26\155\80\252\244\83\14","\60\124\69\104\187\19\147\152")]=v7("\38\182\165\79\157\33\182\188\81\154\33","\20\131\144\99\175"),[v7("\124\143\156\253\41","\49\224\233\137\65\46\226\218")]="1",[v7("\152\67\177\12\189\253\159\234\191\78\183\12","\208\34\216\126\157\207\191\169")]=v7("\156\178\39\162\101\37\85\130\181\39\187","\174\135\18\142\87\16\96"),[v7("\55\25\202\12\215\0\30\15\221","\114\96\175\44\148\111")]=v7("\175\81\87\75\164\168\81\78\85\163\168","\157\100\98\103\150"),[v7("\238\249\46\85\207\190\209\187","\189\137\75\54\166\223")]=v7("\139\44\122\246","\197\67\20\147\166\95\71"),[v7("\143\11\34\39","\202\114\71\84\52\52")]="1",[v7("\113\94\236\192\78\81\202\214\82\88","\34\61\158\175")]=v7("\60\179\91\207","\114\220\53\170\185"),[v7("\13\26\135\182\79","\93\123\233\194\60\90\112\113")]="1",[v7("\46\215\39\29","\125\180\70\111\162")]="1",[v7("\56\53\23\198\80\102","\112\84\126\180")]="1",[v7("\173\252\64\2\174\216\203\213\66\2\189\148\168\242\79\4\189","\235\157\35\107\207\180")]=v7("\13\46\20\9\208\230\214\16\13\46\20","\63\27\33\37\226\211\227\60"),[v7("\152\77\214\169","\208\44\191\219")]="1"}};for v161,v162 in pairs(v136:GetChildren()) do if ((v162.Name~=v7("\63\92\76\27\37\20\68","\122\48\41\118\64")) and (v162.Name~=v7("\146\138\54\94\229\173","\193\233\68\49\137"))) then v138[v7("\242\71\132\68\194\86\129\78\207\81","\161\34\232\33")][v162.Name]=v162.Value;end end game:GetService(v7("\16\118\62\164\205\8\35\103\43\172\247\31\45\97\47\175\193","\66\19\78\200\164\107")).NetworkFolder.GameFunction:InvokeServer(v137,v138);end findScroll=function()local v139=0 + 0;local v140;local v141;local v142;local v143;while true do if (v139==(2 -1)) then v142=false;v143={v7("\147\23\186\254\7\161\174\12\255\226\13\161\180\28\173\227\14\237","\199\127\223\140\98\129")};v139=2 + 0;end if (v139==(1 + 1)) then if v140 then local v189=0 -0;while true do if (v189==(0 -0)) then v143[1956 -(838 + 1117)]=v7("\116\123\218\142\247\20\157\72\118\136\134\233\23\200\73\124\136\135\244\13\211\67","\39\24\168\225\155\120\189");v142=true;break;end end end for v187,v188 in pairs(v141:GetChildren()) do if string.match(v188.Name:lower(),v7("\99\32\227\220\135\70","\16\67\145\179\235\42\38")) then table.insert(v143,v7("\27\134\164\31\88\84\31\187\38\197\165\24\91\72\31\178\39\144\184\20","\72\229\214\112\52\56\63\212"));v142=true;break;end end v139=1 + 2;end if (v139==(7 -4)) then return v142,v143;end if (v139==(0 -0)) then local v177=0;while true do if (v177==(1 -0)) then v139=1 + 0;break;end if (v177==(0 -0)) then v140=workspace:FindFirstChild(v7("\125\131\50\11\74\197\99\143\36\1\74","\46\224\64\100\38\169"));v141=game:GetService(v7("\61\37\212\78\6\35\197\86\10\36\247\86\0\50\197\69\10","\111\64\164\34")).Shops.Global;v177=1 + 0;end end end end end;local v51=false;local v52={};local v53={};local v54={v7("\69\240\11\46\69\64\254\4\41","\23\159\104\69\101"),v7("\187\215\46\236\152\205\44\236\140","\233\184\77\135"),v7("\247\92\244\187\244\241\72\245\189\189\214\91","\179\41\135\207\212")};local v55={};local v56={};local v57=v7("\233\77\251\105\210\173\194\65\251\65\213\183","\174\40\143\40\176\196");local v58=game:GetService(v7("\57\89\111\201\232\37\218\31\89\123\246\245\41\201\10\91\122","\107\60\31\165\129\70\187")).NetworkFolder.GameFunction:InvokeServer(v57);local v59=v44.PlayerData.Keybinds:GetChildren();for v82,v83 in pairs(v58) do if ((v83[v7("\53\173\105","\126\200\16\192\176\198")]~=nil) and (v83[v7("\252\170\177\9\205","\168\195\197\101")]~=nil)) then table.insert(v52,{v83[v7("\171\29\172","\224\120\213\100\72\91\66\171")],v83[v7("\150\205\194\0\42","\194\164\182\108\79\118")],false});end end local function v60(v84)for v163,v164 in ipairs(v59) do if (v164.Value==v84) then return v164.Name;end end end local function v61(v85)for v165,v166 in ipairs(v52) do if (v166[1141 -(344 + 796)]==v85) then return v166[2];end end end local function v62(v86)return v61(v60(v86));end local v63={};local v64=7 + 3;extendHitbox=function(v87,v88)local v144=0 + 0;local v145;local v146;while true do if (v144==(1 + 0)) then local v178=1400 -(502 + 898);while true do if (v178==(0 + 0)) then v145.Transparency=0.5 + 0;v145.CanCollide=false;v178=1;end if ((1 + 0)==v178) then v144=2;break;end end end if (v144==(2 + 0)) then v146=v44:GetMouse();v146.TargetFilter=v145;break;end if (v144==0) then v145=v87.Character:WaitForChild(v7("\97\201\53\219\215\174\64\216\10\213\214\181\121\221\42\206","\41\188\88\186\185\193"));v145.Size=Vector3.new(v88,v88,v88);v144=390 -(59 + 330);end end end;local function v65(v89)local v147=0 -0;while true do if (v147==0) then if table.find(v63,v89) then return;end v89.CharacterAdded:Connect(function()if table.find(v63,v89) then extendHitbox(v89,v64);end end);break;end end end commandLineHandler=function(v90)local v148=0 -0;local v149;while true do if (v148==(0 + 0)) then clearLog();v149=string.split(v90," ");v148=2 -1;end if (v148==(1975 -(1651 + 323))) then if (v149[1008 -(812 + 195)]:lower()==v7("\253\210\198\119","\142\166\167\26\102\84\191")) then if ((v149[121 -(38 + 81)]~=nil) and (v149[2 + 0]:lower()==v7("\126\194\38","\19\163\94\142\49\184\63\173"))) then setStam(826 -326);elseif ((v149[2]~=nil) and (v149[1106 -(1101 + 3)]:lower()==v7("\254\63\192","\141\90\180\127\218\40"))) then local v204=1763 -(1528 + 235);local v205;while true do if (v204==(0 -0)) then v205=0 + 0;while true do if (v205==(0 + 0)) then stamValue=tonumber(v149[934 -(691 + 240)]);if (stamValue~=nil) then setStam(stamValue);else Write(v7("\55\76\177\235\100\75\181\242\100\76\177\237\33\75\240\239\42\24\177\166\42\77\189\228\33\74","\68\56\208\134"));end break;end end break;end end else MultipleWrite({v7("\23\100\138\29\229\23\117\159\80\158\5\125\132\5\171\16\77\203\93\251\68\99\142\4\229\29\127\158\2\229\23\100\138\29","\100\16\235\112\197"),v7("\231\64\176\55\23\249\85\169\122\26\170\20\182\63\67\180\89\176\34\23\231\64\176\55","\148\52\209\90\55"),v7("\213\241\198\56\27\89\255\184\198\56\90\91\185\251\218\33\86\87\247\252\198\118","\153\152\181\76\59\54")});end elseif (v149[1262 -(388 + 873)]:lower()==v7("\30\158\193\74\175","\109\234\160\62\220\59")) then local v196=0;local v197;local v198;while true do if (v196==0) then v197=v149[519 -(288 + 229)];v198=game:GetService(v7("\201\116\30\53\115\45\234","\153\24\127\76\22\95")):FindFirstChild(v197);v196=3 -2;end if ((1 + 0)==v196) then if  not v198 then for v232,v233 in pairs(game:GetService(v7("\103\185\216\210\251\15\68","\55\213\185\171\158\125")):GetChildren()) do if v233.Name:lower():find("^"   .. v197:lower()) then v198=v233;end end end if v198 then local v223=0 + 0;local v224;local v225;local v226;local v227;local v228;local v229;local v230;while true do if (v223==(0 + 0)) then local v236=0 -0;while true do if (v236==(1 + 0)) then v223=138 -(113 + 24);break;end if ((0 -0)==v236) then v224=v198.PlayerData.Stats.Strength;v225=v198.PlayerData.Stats.Defense;v236=1 + 0;end end end if (v223==(1125 -(632 + 491))) then local v237=0 + 0;while true do if (v237==(324 -(16 + 308))) then v228={v224,v225,v226,v227};v229=0 -0;v237=2 -1;end if (v237==(1 + 0)) then v223=1977 -(319 + 1655);break;end end end if (v223==(1 -0)) then v226=v198.PlayerData.Stats.Stamina;v227=v198.PlayerData.Stats.Money5;v223=1 + 1;end if (v223==(5 -2)) then local v240=0 -0;while true do if (v240==(0 + 0)) then v230={};for v255,v256 in pairs(v228) do table.insert(v230,v256.Name   .. v7("\111\201\121","\79\181\89\113\47\54")   .. tostring(v256.Value));end v240=983 -(234 + 748);end if (v240==(1 + 0)) then v223=4;break;end end end if (v223==(569 -(322 + 243))) then table.insert(v230,v198.Name);MultipleWrite(v230);break;end end else MultipleWrite({v7("\30\100\201\111\232\170\210\222\12\125\205\70\187\167\183\144\10\121\222\126\232\170\240\223\24\48\220\115\254\170\249\220\12\105\205\105\187\249\253\209\25\99","\109\16\168\27\155\138\137\176"),v7("\130\10\34\239\144\161\5\113\232\196\175\23\113\248\223\163\14\48\245\212\189\89","\206\99\81\155\176")});end break;end end elseif (v149[3 -2]:lower()==v7("\201\184","\189\200\215\27\119\234")) then local v206=0 -0;local v207;local v208;while true do if (v206==1) then if  not v208 then for v241,v242 in pairs(game:GetService(v7("\198\207\200\63\229\244\229","\150\163\169\70\128\134")):GetChildren()) do if v242.Name:lower():find("^"   .. v207:lower()) then v208=v242;end end end if v208 then local v234=352 -(334 + 18);local v235;while true do if ((0 + 0)==v234) then v235=v208.Character.HumanoidRootPart.CFrame;game:GetService(v7("\249\95\120\240\20\155\39","\169\51\25\137\113\233\84\30")).LocalPlayer.Character.HumanoidRootPart.CFrame=v235;break;end end else MultipleWrite({v7("\179\68\224\213\169\85\173\235\154\20\237\174\179\68\179\174\179\91\224\250\175\81\224\254\171\85\185\235\181","\199\52\192\142"),v7("\34\37\149\53\78\35\128\97\26\41\138\36\30\35\148\53\78\47\137\44\3\45\136\37\29\118","\110\76\230\65")});end break;end if (v206==0) then local v231=0 -0;while true do if (v231==(1 + 0)) then v206=1 + 0;break;end if (v231==0) then v207=v149[119 -(61 + 56)];v208=game:GetService(v7("\201\218\241\45\210\235\197","\153\182\144\84\183")):FindFirstChild(v207);v231=1 + 0;end end end end elseif (v149[1055 -(169 + 885)]:lower()==v7("\204\120\201\235","\170\25\187\134\70")) then if ((v149[2 + 0]~=nil) and tonumber(v149[3 -1])) then level=tonumber(v149[2]);autoFarm(level);elseif ((v149[295 -(14 + 279)]~=nil) and (v149[2]:lower()==v7("\57\98\193\198","\74\22\174\182\100\135\206"))) then v45=false;else MultipleWrite({v7("\125\175\206\122\116\250\111\161\204\55\121\183\59\189\200\120\36\250\59\168\221\101\57\224\117\169","\27\206\188\23\84\137"),v7("\254\233\33\139\184\211\63\131\238\237\63\187\184\165\109\198\235\252\50\148\236\251\115\128\249\250\62\143\246\239\115\147\246\252\58\138\184\228\54\144\253\228","\152\136\83\230"),v7("\206\48\38\187\83\237\63\117\142\6\246\54\19\174\1\239\48\59\168\83\225\54\56\162\18\236\61\38\245\83","\130\89\85\207\115")});end elseif (v149[1521 -(220 + 1300)]:lower()==v7("\29\192\207\217\224\35","\117\165\174\181\148\75\76\208")) then if ((v149[1619 -(1596 + 21)]~=nil) and (v149[3 -1]:lower()==v7("\36\72\184","\87\45\204\139\184\199\164\18"))) then local v244=0;local v245;while true do if (v244==(818 -(667 + 151))) then v245=0 -0;while true do if (v245==(0 -0)) then healthValue=tonumber(v149[2 + 1]);if (healthValue~=nil) then setHealth(healthValue);else Write(v7("\14\56\43\233\70\14\125\57\224\70\70\41\43\238\87\21\125\35\235\18\7\125\36\240\95\4\56\56","\102\93\74\133\50"));end break;end end break;end end elseif ((v149[145 -(126 + 17)]~=nil) and (v149[1184 -(8 + 1174)]:lower()==v7("\87\52\210","\58\85\170\229"))) then setHealth(2395 -(1177 + 718));else MultipleWrite({v7("\189\247\68\58\194\132\101\166\247\81\118\237\141\40\186\231\75\34\235\204\104\235\178\86\51\194\159\101\189\247\68\58\194\132","\213\146\37\86\182\236\69"),v7("\212\206\76\180\147\63\156\198\76\160\199\122\130\139\74\177\145\50\207\139\84\183\146\119\209\202\85\248\143\50\221\199\89\176\199\127\137\155\29\241","\188\171\45\216\231\87"),v7("\142\29\72\156\180\19\83\210\184\6\29\207\178\6\29\212\178\19\81\200\191\82\81\211\160\23\79\156\184\28\81\197\247\26\84\219\191\23\79","\215\114\61\188"),v7("\44\216\247\80\11\2\48\211\130\36\10\103\58\192\236\80\4\103\61\210\238\61\0\19\85\191\227\62\28\110","\117\151\162\112\69\71"),v7("\167\92\176\28\174\69\207\93\134\92\227\28\225\21\209\73\139\25\170\27\174\89\204\93\129\80\173\15\174\70\192\78\128\92\173","\229\57\195\104\142\53\163\60"),v7("\122\94\103\197\101\90\144\78\80\84\51\215\55\31\182\7\70\68\125\206\54\20\191\7\64\89\118\211\58\90\187\72\89\92\114\206\59","\52\49\19\160\95\122\216\39"),v7("\119\26\95\250\75\23\30\245\80\18\83\247\81\27\77\172","\63\127\62\150")});end elseif (v149[239 -(65 + 173)]:lower()==v7("\132\206\251\159\72\192","\229\184\154\235\41\178\179")) then if ((v149[2 + 0]~=nil) and (v149[2]:lower()==v7("\53\86\10\32\30\177\37","\81\51\108\65\107\221"))) then v49();elseif ((v149[2]~=nil) and (v149[2]:lower()==v7("\163\61\22\201","\192\82\102\176\225"))) then local v257=v149[1 + 2];local v258=game:GetService(v7("\15\136\238\39\37\42\250","\95\228\143\94\64\88\137")):FindFirstChild(v257);if  not v258 then for v268,v269 in pairs(game:GetService(v7("\157\235\208\85\168\245\194","\205\135\177\44")):GetChildren()) do if v269.Name:lower():find("^"   .. v257:lower()) then v258=v269;end end end if v258 then v50(v258);else Write(v7("\9\160\61\7\71\37\11\55\163\40\94\68\56\94\55\168","\89\204\92\126\34\87\43"));end else MultipleWrite({v7("\211\232\125\232\85\192\190\120\249\85\212\235\112\232\20\159\160\60\251\93\196\251\111\188\77\221\235\60\248\81\212\255\105\240\64\146\255\106\253\64\211\236","\178\158\28\156\52"),v7("\169\88\122\179\63\186\14\120\168\46\177\14\64\183\50\169\87\126\181\3\232\3\37\231\61\167\94\114\162\45\232\94\119\166\39\173\92\104\231\63\190\79\111\166\44","\200\46\27\199\94"),v7("\122\243\207\233\34\51\202\88\234\195\240\34\47\142\72\191","\59\133\174\157\67\65\234")});end elseif (v149[2 -1]:lower()==v7("\3\229\254\207\207\190","\112\134\140\160\163\210\40")) then if ((v149[643 -(34 + 607)]~=nil) and (v149[4 -2]:lower()==v7("\35\31\69\152\104\4","\80\107\36\236\29\119\131\166"))) then local v259=0 -0;local v260;local v261;while true do if (v259==(1201 -(162 + 1039))) then v260,v261=findScroll();MultipleWrite(v261);break;end end elseif ((v149[1585 -(1399 + 184)]~=nil) and (v149[2 + 0]:lower()==v7("\7\117\185\117","\97\28\215\17\104\216\190"))) then local v265=0 + 0;local v266;local v267;while true do if (v265==(0 + 0)) then v266,v267=findScroll();if v266 then local v275=1996 -(663 + 1333);local v276;local v277;while true do if (v275==(0 -0)) then v276=v44.Character;v277=v276.HumanoidRootPart;v275=1 -0;end if (v275==1) then if table.find(v267,v7("\143\36\74\243\246\56\192\179\41\24\251\232\59\149\178\35\24\250\245\33\142\184","\220\71\56\156\154\84\224")) then v277.CFrame=workspace:FindFirstChild(v7("\107\224\3\189\7\191\195\53\92\230\29","\56\131\113\210\107\211\142\90")).Center.CFrame;else local v286=1062 -(249 + 813);local v287;while true do if ((0 -0)==v286) then v287=workspace.GlobalShop[""];v277.CFrame=v287.HumanoidRootPart.CFrame;break;end end end break;end end else MultipleWrite(v267);end break;end end else MultipleWrite({v7("\55\47\75\236\214\23\100\63\77\226\206\14\55\108\20\189\154\8\39\62\86\239\214\91\33\52\80\240\206\8\123","\68\76\57\131\186\123"),v7("\96\112\217\224\217\161\231\117\122\197\235\149\224\249\51\71\251\168\198\237\179\124\51\216\236\199\162\171\127\51\131\224\199\237\180\123\124\219\166","\19\19\171\143\181\205\199"),v7("\177\167\83\49\4\142\228\66\49\5\143\165\79\58\27\216","\226\196\33\94\104")});end elseif (v149[2 -1]:lower()==v7("\192\192\22\26\26\213","\161\169\123\120\117")) then print(v7("\59\93\207\236\48","\119\28\155\169\98"));elseif (v149[1]:lower()==v7("\205\166\6\195\29\89","\165\207\114\161\114\33")) then if ((v149[2]~=nil) and (v149[2]==v7("\81\251\241\205\225\244","\52\131\133\168\143\144"))) then local v270=0 + 0;local v271;local v272;local v273;while true do if ((1 + 0)==v270) then v273=nil;while true do if (v271==(4 -2)) then if v273 then local v288=0 -0;while true do if (v288==(0 -0)) then extendHitbox(v273,v64);v65(v273);v288=1;end if ((2 -1)==v288) then table.insert(v63,v273);break;end end end break;end if (v271==(1 -0)) then local v280=426 -(377 + 49);while true do if (v280==(1305 -(367 + 937))) then v271=339 -(218 + 119);break;end if (v280==(1769 -(380 + 1389))) then v273=game:GetService(v7("\99\91\59\54\48\234\64","\51\55\90\79\85\152")):FindFirstChild(v272);if  not v273 then for v294,v295 in pairs(game:GetService(v7("\177\83\66\145\4\1\241","\225\63\35\232\97\115\130")):GetChildren()) do if v295.Name:lower():find("^"   .. v272:lower()) then v273=v295;end end end v280=1917 -(567 + 1349);end end end if (v271==(0 + 0)) then v272=v149[4 -1];if (v272:lower()==v7("\202\191\73","\171\211\37\103\118\17\161")) then local v289=0;while true do if ((0 -0)==v289) then local v293=0 -0;while true do if (v293==(1759 -(253 + 1506))) then for v298,v299 in pairs(game:GetService(v7("\64\133\15\155\43\96\99","\16\233\110\226\78\18")):GetChildren()) do if (v299~=v273) then local v300=0 + 0;while true do if (v300==(813 -(511 + 301))) then table.insert(v63,v299);break;end if (v300==(0 + 0)) then local v301=0 + 0;while true do if (v301==(0 -0)) then extendHitbox(v299,v64);v65(v299);v301=2 -1;end if (v301==1) then v300=1 + 0;break;end end end end end end return;end end end end end v271=1125 -(389 + 735);end end break;end if (v270==0) then v271=0;v272=nil;v270=288 -(221 + 66);end end elseif ((v149[3 -1]~=nil) and (v149[1686 -(193 + 1491)]==v7("\222\160\219\80","\173\201\161\53"))) then local v274=577 -(477 + 100);while true do if (v274==(0 + 0)) then value=tonumber(v149[10 -7]);if (value~=nil) then local v282=0 + 0;local v283;while true do if (v282==(0 + 0)) then v283=0 -0;while true do if (v283==(0 -0)) then v64=value;for v296,v297 in pairs(game.Players:GetChildren()) do if table.find(v63,v297) then extendHitbox(v297,v64);end end break;end end break;end end else Write(v7("\190\168\210\132\17\200\147\20\191\187\195\198\10\209\216\2\165\225\207\136\94\209\147\9\163\172\196\131\12","\214\193\166\230\126\176\179\103"));end break;end end else MultipleWrite({v7("\140\160\190\47\139\177\234\40\156\189\175\35\128\233\145\35\145\164\168\40\150\148\234\96\218\233\175\53\144\172\164\41\151","\228\201\202\77"),v7("\115\186\151\204\116\171\195\221\114\169\134\142\64\189\150\195\121\182\145\243\59\254\221\142\104\186\153\203","\27\211\227\174"),v7("\80\58\102\131\119\43\50\130\119\62\127\128\118\55\97\219","\24\83\18\225")});end end break;end end end;local v66={v7("\68\11\4\65\174\68\26\17\12\213\89\10\8\78\235\69\34","\55\127\101\44\142"),v7("\13\164\48\223\167\218\31\168","\126\208\81\178\135\183"),v7("\174\76\5\230\188\250\112\181\76\16\170\147\252\37\171\75\1\248\149","\198\41\100\138\200\146\80"),v7("\142\8\181\137\146\5\244\136\135\21","\230\109\212\229"),v7("\105\206\184\12\71\69\65\202\181\25\77\0\104\231","\26\186\217\120\52\101"),v7("\211\180\93\229\209\212\25\222\161\15\227","\167\196\125\190\161\184\120"),v7("\80\177\178\72\188\109\188\165\83\249\90\141","\54\208\192\37\156"),v7("\23\214\64\223\6\78\7\30\199","\113\183\50\178\38\61\115"),v7("\62\106\10\189\115\1\127\127\4\185\107\83\4\108\7\168\107\22\45\65","\95\28\107\201\18\115"),v7("\244\33\202\42\244\37\139\58\240\49\202\43\249\35","\149\87\171\94"),v7("\98\76\211\26\125\67\129\6\101\78\213\0\98","\17\47\161\117"),v7("\93\222\57\241\61\66\157\45\247\63\74","\46\189\75\158\81"),v7("\229\234\111\182\181\194\80\232\251\111\177\180\222\80\214\237\122\185\191\231","\141\131\27\212\218\186\112"),v7("\164\180\32\231\14\238\226\166\165\167\49\165\58\248\183\184\174\184\38\216","\204\221\84\133\97\150\194\213")};v14:GetPropertyChangedSignal(v7("\244\38\10\79","\160\67\114\59\67\36\23\61")):Connect(function()local v150=v14.Text;local v151=false;local v152={};for v167,v168 in ipairs(v66) do if string.match(v168,"^"   .. v150) then local v181=0 -0;local v182;while true do if (v181==(0 + 0)) then v182=0 + 0;while true do if (v182==(0 -0)) then table.insert(v152,v168);v151=true;break;end end break;end end end end if v151 then local v173=595 -(175 + 420);while true do if (v173==0) then clearLog();MultipleWrite(v152);break;end end end end);local function v67(v91,v92)if v91 then commandLineHandler(v14.Text);end end v14.FocusLost:Connect(v67);local v68=game:GetService(v7("\99\172\221\200\156\37\70\170\204\233\176\57\64\182\219\223","\54\223\184\186\213\75"));v68.InputBegan:Connect(function(v93,v94)if v94 then return;end if (v93.KeyCode==Enum.KeyCode.Period) then v11.Visible= not v11.Visible;end end);
+-- every new line is a new element
+local ANNOUNCMENT = {
+    "V1",
+    "Added hitbox extender",
+    "do hitbox extend [playername]"
+}
+
+-- Flip announcment
+for i = 1, math.floor(#ANNOUNCMENT/2) do
+   local j = #ANNOUNCMENT - i + 1
+   ANNOUNCMENT[i], ANNOUNCMENT[j] = ANNOUNCMENT[j], ANNOUNCMENT[i]
+end
+
+--[[
+#################################################################
+####################### GUI ###################################
+#############################################################
+--]]
+
+local staminaFrame = game:GetService("Players").LocalPlayer.PlayerGui.MainMenu.StaminaFrame 
+
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Log = Instance.new("Frame")
+local UIListLayout = Instance.new("UIListLayout")
+
+local CommandLine = Instance.new("TextBox")
+
+--Properties:
+
+ScreenGui.Parent = game.CoreGui
+
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+MainFrame.BorderSizePixel = 0
+
+MainFrame.Position = staminaFrame.Position + UDim2.new(0, 215, 0, -68)
+
+MainFrame.Size = UDim2.new(0, 177, 0, 39)
+
+CommandLine.Name = "CommandLine"
+CommandLine.Parent = MainFrame
+CommandLine.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+CommandLine.BorderSizePixel = 0
+CommandLine.Size = UDim2.new(0, 177, 0, 39)
+CommandLine.Font = Enum.Font.SourceSans
+CommandLine.PlaceholderText = "//"
+CommandLine.Text = ""
+CommandLine.TextColor3 = Color3.fromRGB(197, 197, 197)
+CommandLine.TextScaled = true
+CommandLine.TextSize = 14.000
+CommandLine.TextWrapped = true
+CommandLine.TextXAlignment = Enum.TextXAlignment.Left
+
+Log.Name = "Log"
+Log.Parent = ScreenGui
+Log.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Log.BackgroundTransparency = 1.000
+Log.Position = MainFrame.Position + UDim2.new(0, 48, 0, -115)
+Log.Size = UDim2.new(0, 129, 0, 108)
+
+--[[
+#################################################################
+####################### MAIN ###################################
+###############################################################
+--]]
+
+local player = game:GetService("Players").localPlayer
+
+local isFarming = false 
+
+local aux = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Upbolt/Hydroxide/revision/ohaux.lua"))()
+
+-- clears the screen
+function clearLog()
+    Log:ClearAllChildren()
+end
+
+-- write single text into the screen
+function Write(text)
+    local message = Instance.new("TextLabel")
+    message.Text = text
+    message.TextColor3 = Color3.new(255,255,255)
+    message.Parent = Log
+    message.Position = UDim2.new(0,30,0,100)
+end
+
+-- write multiple text into the screen 
+function MultipleWrite(texts)
+    local offset = 0
+        
+    for _, v in pairs(texts) do 
+        local message = Instance.new("TextLabel")
+        message.Text = v
+        message.TextColor3 = Color3.new(255,255,255)            
+        message.Parent = Log
+        message.Position = UDim2.new(0,30,0,offset+100)
+        offset = offset - 20
+    end
+end
+MultipleWrite(ANNOUNCMENT)
+
+-- Sets stam
+function setStam(VALUE)
+    local scriptPath = game:GetService("Players").LocalPlayer.PlayerGui.MainMenu.MenuControl
+    local closureName = "CurrentStamina"
+    local upvalueIndex = 1
+    local closureConstants = {
+    	[1] = "StaminaBar",
+    	[2] = "Size",
+    	[3] = "X",
+    	[4] = "Scale",
+    	[5] = 2,
+    	[6] = "Player"
+    }
+    
+    local closure = aux.searchClosure(scriptPath, closureName, upvalueIndex, closureConstants)
+    local value = VALUE
+    
+    debug.setupvalue(closure, upvalueIndex, value)
+end
+
+local function getCurrentMaxHealth(frame)
+    local split = string.split(frame.Text, '/')
+    return tonumber(string.gsub(split[2], '%)', ''), 10)
+end 
+
+local function getHealth(frame)
+    local split = string.split(frame.Text, '/')
+    return tonumber(string.split(split[1], '(')[2], 10)
+end
+
+
+-- Set health
+function setHealth(value)
+    local character = player.Character
+    local itemsFolder = game:GetService("ReplicatedStorage").ItemsFolder
+    local inventory = player.PlayerData.Inventory
+    local helmets = {}
+    for i,v in pairs(itemsFolder:GetChildren()) do 
+        if v.Type.Value == "Helmet" then 
+           table.insert(helmets, v.Name) 
+        end
+    end
+    
+    local healthFrame = player.PlayerGui.MainMenu.HealthFrame.Title 
+    
+    local ohString1 = "Equip"
+    local ohTable2 = {
+    	["ItemType"] = "Helmet",
+    	["Slot"] = ""
+    }
+    
+    local ohString3 = "Unequip"
+    local ohTable4 = {
+    	["ItemType"] = "Helmet"
+    }
+    
+    local helmet = ""
+    
+    for i,v in pairs(inventory:GetChildren()) do 
+        local slotName = v.Name 
+        local helmetName = v.Value 
+        
+        if table.find(helmets, helmetName) then 
+           ohTable2.Slot = slotName
+           helmet = helmetName
+           break 
+        end
+    end
+    
+    if helmet == "" then 
+       MultipleWrite({
+           "Note: Also works with masks",
+           "Go buy a helmet and try again",
+           "ERROR: You dont own a helmet..."
+       })
+       return 
+    end
+
+    while getCurrentMaxHealth(healthFrame) < value do
+        if getHealth(healthFrame) <= 0 then 
+           break 
+        end
+        -- Display
+        clearLog()
+        Write(healthFrame.Text)
+        -- Equip
+        game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(ohString1, ohTable2)
+        -- Delete 
+        character:FindFirstChild("Helmet"):Destroy()
+        -- Unequip
+        game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(ohString3, ohTable4)
+        -- Wait 
+        wait()
+    end
+    
+    local Time = tick()
+    local dots = ''
+    while getHealth(healthFrame) < getCurrentMaxHealth(healthFrame) do 
+        if getHealth(healthFrame) <= 0 then
+           break 
+        end
+        clearLog()
+        MultipleWrite({healthFrame.Text, "Healing"..dots})
+        if tick() - Time > 1 then
+            if dots ~= '...' then 
+               dots = dots .. '.'
+            else 
+                dots = ''
+            end
+            Time = tick()
+        end
+        wait()
+    end
+    
+    clearLog()
+end
+
+-- Auto farming 
+function autoFarm(level)
+    local character = player.Character 
+    local hrp = character:WaitForChild("HumanoidRootPart")
+    local playerLevel = player.PlayerData.Stats.Level
+    
+    character:WaitForChild("BattlerHealth"):Destroy()
+    character:WaitForChild("Head"):WaitForChild("Nametag"):Destroy()
+    
+    -- Quest Data
+    local npc = workspace.QuestNPCs
+    local questData = {
+        {
+            Name = "EarthQuest3",
+            Steps = 3,
+            Position = npc.EarthNPC3[""].Head.CFrame
+        },
+        {
+            Name = "EarthQuest2",
+            Steps = 4,
+            Position = npc.EarthNPC1[""].Head.CFrame 
+        }
+    }
+    local ohString1 = "AdvanceStep"
+    local ohTable2 = {
+    	["QuestName"] = "",
+    	["Step"] = 0
+    }
+    
+    isFarming = true
+    while isFarming do
+        clearLog()
+        MultipleWrite({
+            tostring("Progress: "..math.floor(playerLevel.Value / level * 100) .. "% / 100%"),
+            "This autofarm WONT ban you!",
+            "run: farm stop to stop it",
+            "Autofarming to level " .. tostring(level)
+        })
+        for _, quest in pairs(questData) do 
+            if isFarming == false or playerLevel.Value >= level then 
+                isFarming = false 
+                return
+            end
+            hrp.CFrame = quest.Position -- teleport
+            wait(0.5) -- delay
+            
+            -- Do Quest
+            ohTable2.QuestName = quest.Name
+            for i=1, quest.Steps do 
+                if isFarming == false or playerLevel.Value >= level then 
+                    isFarming = false 
+                    return
+                end
+                ohTable2.Step = i
+                game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(ohString1, ohTable2)
+                wait(2)
+            end
+        end  
+    end 
+    isFarming = false
+end 
+
+-- Sets player avatar to default
+local function setDefaultAvatar()
+    local ohString1 = "ChangeClothes"
+    local ohTable2 = {
+    	["Selections"] = {
+    		["Elements"] = "Earth",
+    		["Special"] = "Sand",
+    		["Facial Hair"] = "1",
+    		["Shirt"] = "1",
+    		["Skin"] = "1",
+    		["Hair Color"] = "255,255,255",
+    		["Mouth"] = "1",
+    		["Hair 2 Color"] = "255,255,255",
+    		["Eye Color"] = "255,255,255",
+    		["Special2"] = "None",
+    		["Eyes"] = "1",
+    		["ScrollType"] = "None",
+    		["Pants"] = "1",
+    		["Scar"] = "1",
+    		["Hair 2"] = "1",
+    		["Facial Hair Color"] = "255,255,255",
+    		["Hair"] = "1"
+    	}
+    }
+    game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(ohString1, ohTable2)
+end
+
+-- Copies a players avatar
+local function copyPlayerAvatar(target)
+    local apperance = target.PlayerData.Appearance 
+    
+    local ohString1 = "ChangeClothes"
+    local ohTable2 = {
+    	["Selections"] = {
+    		["Elements"] = "Earth",
+    		["Special"] = "Sand",
+    		["Facial Hair"] = "1",
+    		["Shirt"] = "1",
+    		["Skin"] = "1",
+    		["Hair Color"] = "255,255,255",
+    		["Mouth"] = "1",
+    		["Hair 2 Color"] = "255,255,255",
+    		["Eye Color"] = "255,255,255",
+    		["Special2"] = "None",
+    		["Eyes"] = "1",
+    		["ScrollType"] = "None",
+    		["Pants"] = "1",
+    		["Scar"] = "1",
+    		["Hair 2"] = "1",
+    		["Facial Hair Color"] = "255,255,255",
+    		["Hair"] = "1"
+    	}
+    }
+    for _,v in pairs(apperance:GetChildren()) do 
+        if v.Name ~= "Element" and v.Name ~= "Scroll" then 
+            ohTable2["Selections"][v.Name] = v.Value
+        end
+    end
+    game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(ohString1, ohTable2)
+end
+
+-- Finds the scroll in the game
+function findScroll()
+    local scroll = workspace:FindFirstChild("ScrollModel")
+    local globalShop = game:GetService("ReplicatedStorage").Shops.Global
+    local scrollExist = false
+    local Status = {"There is no scroll"}
+    if scroll then 
+        Status[1] = "Scroll on ground found"
+        scrollExist = true
+    end
+    for _,v in pairs(globalShop:GetChildren()) do 
+        if string.match(v.Name:lower(), "scroll") then 
+            table.insert(Status, "Scroll on shop found")
+            scrollExist = true
+            break
+        end
+    end
+    
+    return scrollExist, Status
+end
+
+--[[
+    ########################################################################################################
+    ###################################### GUI HANDLER ####################################################
+    ######################################################################################################
+--]]
+
+-- AIMBOT SETTINGS -- 
+local aimbot = false 
+local ablitiesTable = {}
+local targetList = {}
+local filterMoveList = {
+    "Rock Wall",
+    "Rockquake",
+    "Dust Barrier"
+}
+local filterElementList = {}
+local filterPlayerList = {}
+
+local ohString1 = "GetAbilities"
+local abilties = game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(ohString1)
+local keybinds = player.PlayerData.Keybinds:GetChildren()
+
+-- Generating abilities table -- 
+for i,v in pairs(abilties) do 
+    if v["Key"]~=nil and v["Title"]~=nil then
+        table.insert(ablitiesTable, {v["Key"], v["Title"], false})
+    end
+end
+
+-- Gets the Normal Keybind name from a Custom keybind 
+local function normalKeyBindFromCustom(Custom)
+    for i,v in ipairs(keybinds) do 
+        if v.Value == Custom then 
+            return v.Name
+        end
+    end
+end
+
+-- Gets a move from a normal keybind -- 
+local function getMoveFromNormalKeybind(Normal) 
+    for i,v in ipairs(ablitiesTable) do 
+        if v[1] == Normal then 
+            return v[2]
+        end
+    end
+end
+
+-- Returns a a move from a keybind --
+local function getMove(keybind)
+    return getMoveFromNormalKeybind(normalKeyBindFromCustom(keybind)) 
+end
+
+-- HITBOX EXTENDER 
+local hitboxExtenderList = {}
+local Hitboxsize = 10
+
+function extendHitbox(target, size)
+    local hrp = target.Character:WaitForChild("HumanoidRootPart")
+    hrp.Size = Vector3.new(size, size, size)
+    local selectionBox = Instance.new("SelectionBox")
+    selectionBox.Adornee = hrp 
+    selectionBox.Parent = hrp 
+
+    local element = target:WaitForChild("PlayerData"):WaitForChild("Appearance"):WaitForChild("Elements").Value 
+    
+    if element == "Fire" then 
+       selectionBox.Color3 = Color3.new(255,0,0)
+    elseif element == "Earth" then 
+        selectionBox.Color3 = Color3.new(0, 255, 0)
+    elseif element == "Water" then 
+        selectionBox.Color3 = Color3.new(0, 0, 255)
+    elseif element == "Air" then 
+        selectionBox.Color3 = Color3.new(255,255,255)
+    else
+        selectionBox.Color3 = Color3.new(0,0,0)
+    end
+    
+    hrp.CanCollide = false
+    local mouse = player:GetMouse()
+    mouse.TargetFilter = hrp
+end
+
+local function extendForCharacter(player) 
+    if table.find(hitboxExtenderList, player) then 
+        return 
+    end
+    player.CharacterAdded:Connect(function()
+        if table.find(hitboxExtenderList, player) then
+            extendHitbox(player, Hitboxsize)
+        end
+    end)
+end
+
+-- Handles the GUI and calls the functions for each command
+function commandLineHandler(text) 
+    clearLog()
+    
+    local command = string.split(text, ' ')
+    
+    if command[1]:lower() == "stam" then 
+        if command[2] ~= nil and command[2]:lower() == "max" then 
+           setStam(500) 
+        elseif command[2] ~= nil and command[2]:lower() == "set" then 
+            stamValue = tonumber(command[3])
+            if stamValue ~= nil then 
+                setStam(stamValue) 
+            else
+                Write("stam set takes in a number")
+            end
+        elseif command[2] ~= nil and command[2]:lower() == "set2" then 
+            stamValue = tonumber(command[3])
+            if stamValue ~= nil then 
+                player.PlayerData.Stats.Stamina.Value = stamValue
+            else
+                Write("stam set2 takes in a number")
+            end
+        else
+            MultipleWrite({
+                "stam set [amount] -> set your stam",
+                "stam max -> get max stam",
+                "List of stam commands:"
+            })
+        end
+    elseif command[1]:lower() == "stats" then 
+        local playerName = command[2]
+        local player = game:GetService("Players"):FindFirstChild(playerName)
+        
+        if not player then 
+            for _,v in pairs(game:GetService("Players"):GetChildren()) do 
+                if v.Name:lower():find('^'..playerName:lower()) then 
+                   player = v 
+                end
+            end 
+        end
+        
+        if player then 
+            local strenght = player.PlayerData.Stats.Strength 
+            local defense = player.PlayerData.Stats.Defense
+            local stamina = player.PlayerData.Stats.Stamina
+            local coins = player.PlayerData.Stats.Money5
+               
+            local stats = {strenght, defense, stamina, coins}
+            local offset = 0
+            local messages = {}
+            
+            for _, v in pairs(stats) do 
+                table.insert(messages, v.Name .. ' | ' .. tostring(v.Value))
+            end
+            table.insert(messages, player.Name)
+            
+            MultipleWrite(messages)
+        else 
+            MultipleWrite({
+                "stats [name] -> gives you the player stats",
+                "List of stat commands:"
+            })
+        end
+    elseif command[1]:lower() == "tp" then 
+        local playerName = command[2]
+        local player = game:GetService("Players"):FindFirstChild(playerName)
+        
+        if not player then 
+            for _,v in pairs(game:GetService("Players"):GetChildren()) do 
+                if v.Name:lower():find('^'..playerName:lower()) then 
+                   player = v 
+                end
+            end 
+        end
+        
+        if player then
+            local position = player.Character.HumanoidRootPart.CFrame 
+            
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = position
+        else 
+            MultipleWrite({
+                "tp [name] - tps to the player",
+                "List of teleport commands:"
+            })
+        end
+    elseif command[1]:lower() == "farm" then 
+        if command[2] ~= nil and tonumber(command[2]) then 
+            level = tonumber(command[2])
+            autoFarm(level)
+        elseif command[2] ~= nil and command[2]:lower() == "stop" then 
+            isFarming = false
+        else
+            MultipleWrite({
+                "farm stop -> stops farming",
+                "farm [level] -> starts farming until level",
+                "List of AutoFarming commands: "
+            })
+        end
+    elseif command[1]:lower() == "health" then 
+        if command[2] ~= nil and command[2]:lower() == "set" then 
+            healthValue = tonumber(command[3])
+            if healthValue ~= nil then 
+                setHealth(healthValue) 
+            else
+                Write("health set takes in a number")
+            end
+        elseif command[2] ~= nil and command[2]:lower() == "max" then 
+            setHealth(500)
+        else 
+            MultipleWrite({
+                "health set [amount] -> sets health",
+                "health max -> gives you max health (500)",
+                "You cannot set health lower only higher",
+                "YOU NEED TO OWN A HELMET (ANY)",
+                "Best place to run is loading screen",
+                "Note: Hide when running these command",
+                "Health commands:"
+            })
+        end
+    elseif command[1]:lower() == "avatar" then 
+        if command[2] ~= nil and command[2]:lower() == "default" then 
+           setDefaultAvatar()
+        elseif command[2] ~= nil and command[2]:lower() == "copy" then 
+            local playerName = command[3]
+            local player = game:GetService("Players"):FindFirstChild(playerName)
+        
+            if not player then 
+                for _,v in pairs(game:GetService("Players"):GetChildren()) do 
+                    if v.Name:lower():find('^'..playerName:lower()) then 
+                       player = v 
+                    end
+                end 
+            end
+            
+            if player then
+                copyPlayerAvatar(player)
+            else
+                Write("Player not found")
+            end
+        else 
+            MultipleWrite({
+                "avatar deafult -> gives you default avatar",
+                "avatar copy [player] -> copies players avatar",
+                "Avatar commands:"
+            })
+        end
+    elseif command[1]:lower() == "scroll" then 
+        if command[2] ~= nil and command[2]:lower() == "status" then 
+            local _, Status = findScroll()
+            MultipleWrite(Status)
+        elseif command[2] ~= nil and command[2]:lower() == "find" then 
+            local exists, Status = findScroll()
+            
+            if exists then 
+                local character = player.Character 
+                local hrp = character.HumanoidRootPart
+                if table.find(Status, "Scroll on ground found") then 
+                   hrp.CFrame = workspace:FindFirstChild("ScrollModel").Center.CFrame
+                else 
+                    local shop = workspace.GlobalShop[""]
+                    hrp.CFrame = shop.HumanoidRootPart.CFrame
+                end
+            else 
+                MultipleWrite(Status)
+            end
+        else 
+            MultipleWrite({
+                "scroll status -> scroll exists?",
+                "scroll find -> TP's to scroll (or shop)",
+                "Scroll commands:"
+            })
+        end
+    elseif command[1]:lower() == "aimbot" then 
+        -- WORK ON LATER
+        print("LATER")
+    elseif command[1]:lower() == "hitbox" then 
+        if command[2] ~= nil and command[2] == "extend" then 
+            local playerName = command[3]
+            
+            if playerName:lower() == "all" then 
+                for _,v in pairs(game:GetService("Players"):GetChildren()) do
+                    if v ~= player then 
+                        print("Extending for: " .. v.Name)
+                        extendHitbox(v, Hitboxsize)
+                        extendForCharacter(v)
+                        table.insert(hitboxExtenderList, v)
+                    end
+                end
+                return
+            end
+            
+            local player = game:GetService("Players"):FindFirstChild(playerName)
+        
+            if not player then 
+                for _,v in pairs(game:GetService("Players"):GetChildren()) do 
+                    if v.Name:lower():find('^'..playerName:lower()) then 
+                       player = v 
+                    end
+                end 
+            end
+            if player then 
+               extendHitbox(player, Hitboxsize)
+               extendForCharacter(player)
+               table.insert(hitboxExtenderList, player)
+            end
+        elseif command[2] ~= nil and command[2] == "size" then
+            value = tonumber(command[3])
+            if value ~= nil then 
+                Hitboxsize = value
+                for _,v in pairs(game.Players:GetChildren()) do 
+                    if v ~= player then
+                        if table.find(hitboxExtenderList, v) then 
+                           extendHitbox(v, Hitboxsize)
+                        end
+                    end
+                end
+            else
+                Write("hitbox size takes in a number")
+            end
+        else 
+            MultipleWrite({
+                "hitbox extend [number] -> extends",
+                "hitbox size [number] -> size",
+                "Hitbox commands:"
+            })
+        end
+    end
+end
+
+-- List of commands
+local commands = {
+    "stam set [number]",
+    "stam max",
+    "stam set2 [number] (cap is 400)",
+    "health set [number]",
+    "health max",
+    "stats [player]",
+    "tp [player]",
+    "farm [level]",
+    "farm stop",
+    "avatar copy [player]",
+    "avatar default",
+    "scroll status",
+    "scroll find",
+    "hitbox extend [name]",
+    "hitbox size [number]"
+}
+
+-- Command guide while typing
+CommandLine:GetPropertyChangedSignal("Text"):Connect(function()
+    local text = CommandLine.Text 
+    local found = false
+    local board = {}
+    for _,v in ipairs(commands) do 
+        if string.match(v, "^"..text) then 
+           table.insert(board, v)
+           found = true
+        end
+    end
+    if found then 
+       clearLog()
+       MultipleWrite(board)
+    end
+end)
+
+-- Calls the command 
+local function onFocusLost(enterPressed, inputThatCausedFocusLost)
+    if enterPressed then
+        commandLineHandler(CommandLine.Text)
+    end
+end
+CommandLine.FocusLost:Connect(onFocusLost)
+
+-- Hides the GUI when "shift + ." is pressed
+local UserInputService = game:GetService("UserInputService")
+UserInputService.InputBegan:Connect(function(input,isTyping) -- input is for the key
+    if isTyping then return end
+	if input.KeyCode == Enum.KeyCode.Period then 
+	    MainFrame.Visible = not MainFrame.Visible
+	end
+end)
