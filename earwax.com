@@ -1,8 +1,10 @@
 -- every new line is a new element
 local ANNOUNCMENT = {
-    "V1",
-    "Added hitbox extender",
-    "do hitbox extend [playername]"
+    "V2",
+    "run \"hide\" to hide all exploits",
+    "you can now target 1 player with aimbot",
+    "by doing aimbot target [playername]",
+    "do aimbot toggle to target everyone",
 }
 
 -- Flip announcment
