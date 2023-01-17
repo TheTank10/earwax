@@ -72,6 +72,8 @@ local isFarming = false
 
 local aux = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Upbolt/Hydroxide/revision/ohaux.lua"))()
 
+local normalPlayerStam = player:WaitForChild("PlayerData"):WaitForChild("Stats"):WaitForChild("Stamina").Value
+
 -- clears the screen
 function clearLog()
     Log:ClearAllChildren()
@@ -131,6 +133,7 @@ local function getHealth(frame)
     return tonumber(string.split(split[1], '(')[2], 10)
 end
 
+local normalPlayerHealth = nil
 
 -- Set health
 function setHealth(value)
@@ -144,7 +147,8 @@ function setHealth(value)
         end
     end
     
-    local healthFrame = player.PlayerGui.MainMenu.HealthFrame.Title 
+    local healthFrame = player.PlayerGui.MainMenu.HealthFrame.Title
+    normalPlayerHealth = getHealth(healthFrame)
     
     local ohString1 = "Equip"
     local ohTable2 = {
@@ -368,52 +372,6 @@ end
     ######################################################################################################
 --]]
 
--- AIMBOT SETTINGS -- 
-local aimbot = false 
-local ablitiesTable = {}
-local targetList = {}
-local filterMoveList = {
-    "Rock Wall",
-    "Rockquake",
-    "Dust Barrier"
-}
-local filterElementList = {}
-local filterPlayerList = {}
-
-local ohString1 = "GetAbilities"
-local abilties = game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(ohString1)
-local keybinds = player.PlayerData.Keybinds:GetChildren()
-
--- Generating abilities table -- 
-for i,v in pairs(abilties) do 
-    if v["Key"]~=nil and v["Title"]~=nil then
-        table.insert(ablitiesTable, {v["Key"], v["Title"], false})
-    end
-end
-
--- Gets the Normal Keybind name from a Custom keybind 
-local function normalKeyBindFromCustom(Custom)
-    for i,v in ipairs(keybinds) do 
-        if v.Value == Custom then 
-            return v.Name
-        end
-    end
-end
-
--- Gets a move from a normal keybind -- 
-local function getMoveFromNormalKeybind(Normal) 
-    for i,v in ipairs(ablitiesTable) do 
-        if v[1] == Normal then 
-            return v[2]
-        end
-    end
-end
-
--- Returns a a move from a keybind --
-local function getMove(keybind)
-    return getMoveFromNormalKeybind(normalKeyBindFromCustom(keybind)) 
-end
-
 -- HITBOX EXTENDER 
 local hitboxExtenderList = {}
 local Hitboxsize = 10
@@ -422,26 +380,24 @@ function extendHitbox(target, size)
     local hrp = target.Character:WaitForChild("HumanoidRootPart")
     hrp.Size = Vector3.new(size, size, size)
     
-    if not hrp:FindFirstChild("xuz") then
-        local selectionBox = Instance.new("SelectionBox")
-        selectionBox.Adornee = hrp 
-        selectionBox.Parent = hrp 
-        selectionBox.Name = "xuz"
+    local selectionBox = Instance.new("SelectionBox")
+    selectionBox.Adornee = hrp 
+    selectionBox.Parent = hrp 
+    selectionBox.Name = "xuz"
     
-        local element = target:WaitForChild("PlayerData"):WaitForChild("Appearance"):WaitForChild("Elements").Value 
+    local element = target:WaitForChild("PlayerData"):WaitForChild("Appearance"):WaitForChild("Elements").Value 
         
-        if element == "Fire" then 
-           selectionBox.Color3 = Color3.new(255,0,0)
-        elseif element == "Earth" then 
-            selectionBox.Color3 = Color3.new(0, 255, 0)
-        elseif element == "Water" then 
-            selectionBox.Color3 = Color3.new(0, 0, 255)
-        elseif element == "Air" then 
-            selectionBox.Color3 = Color3.new(255,255,255)
-        else
-            selectionBox.Color3 = Color3.new(0,0,0)
-        end
-    end 
+    if element == "Fire" then 
+        selectionBox.Color3 = Color3.new(255,0,0)
+    elseif element == "Earth" then 
+        selectionBox.Color3 = Color3.new(0, 255, 0)
+    elseif element == "Water" then 
+        selectionBox.Color3 = Color3.new(0, 0, 255)
+    elseif element == "Air" then 
+        selectionBox.Color3 = Color3.new(255,255,255)
+    else
+        selectionBox.Color3 = Color3.new(0,0,0)
+    end
     
     hrp.CanCollide = false
     local mouse = player:GetMouse()
@@ -458,6 +414,142 @@ local function extendForCharacter(player)
         end
     end)
 end
+
+-- AIMBOT
+
+-- Aimbot settings
+local aimbot = false 
+local moveFilter = {
+    "Swing Kick"
+}
+local target = nil
+local hitbox = true
+local playerList = game:GetService("Players"):GetChildren()
+
+-- Gets keybinds/abilities
+local ohString1 = "GetAbilities"
+local abilities = game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(ohString1)
+local abilitiesTable = {}
+local keybinds = player.PlayerData.Keybinds:GetChildren()
+    
+for i,v in pairs(abilities) do 
+    if v["Key"]~=nil and v["Title"]~=nil then
+        table.insert(abilitiesTable, {v["Key"], v["Title"]})
+    end
+end
+
+-- Gets the Normal Keybind name from a Custom keybind 
+local function normalKeyBindFromCustom(Custom)
+    for i,v in ipairs(keybinds) do 
+        if v.Value == Custom then 
+            return v.Name
+        end
+    end
+end
+
+-- Gets a move from a normal keybind
+local function getMoveFromNormalKeybind(Normal) 
+    for i,v in ipairs(abilitiesTable) do 
+        if v[1] == Normal then 
+            return v[2]
+        end
+    end
+end
+
+-- Returns a a move from a keybind
+local function getMove(keybind)
+    return getMoveFromNormalKeybind(normalKeyBindFromCustom(keybind)) 
+end
+
+local strikePosition = nil
+local function getAimPosition(move) 
+    -- Find the aim position using the target object
+    local position = nil
+    if move == "Thunder Strike" then 
+        if strikePosition == nil then 
+           return target.Position - Vector3.new(0, 5, 0) 
+        else 
+           return strikePosition
+        end
+    else 
+        position = target.Position
+    end
+    return position
+end
+
+local OldNameCall = nil
+OldNameCall = hookmetamethod(game, "__namecall", function(Self, ...)
+    local Args = {...}
+    local NamecallMethod = getnamecallmethod()
+
+    if not checkcaller() and NamecallMethod == "InvokeServer" then
+        if Args[1] == "ProcessKey" then
+            local data = Args[2]
+            local key = data.Key 
+            local move = getMove(key)
+            
+            -- Ignore Moves that are filtered off
+            if target ~= nil then
+                if not table.find(moveFilter, move) then 
+                    data.AimPos = getAimPosition(move)
+                end
+            end
+                
+            Args[2] = data
+        end
+    end
+    return OldNameCall(Self, table.unpack(Args))
+end)
+
+local oldTarget = nil
+local targetSelectionBox = Instance.new("SelectionBox")
+local mouse = player:GetMouse()
+function findTarget()
+    for _, player in pairs(playerList) do
+        if player ~= game:GetService("Players").LocalPlayer then
+            local character = player.Character 
+            local ut = character:FindFirstChild("UpperTorso")
+            if ut ~= nil then 
+               if oldTarget ~= nil then
+                   -- Calculate distance from old target using mouse
+                   
+                   local mousePosition = mouse.Hit.p
+                   local distanceFromOldTarget = math.abs((mousePosition - oldTarget.Position).Magnitude)
+                   local distanceFromTarget = math.abs((mousePosition - ut.Position).Magnitude)
+                   
+                   if distanceFromTarget <= distanceFromOldTarget then 
+                       target = ut 
+                       oldTarget = ut
+                   end
+               else 
+                   oldTarget = ut 
+               end
+            end
+        end
+    end
+    targetSelectionBox.Adornee = target 
+    targetSelectionBox.Parent = target
+    
+    local rayOrigin = target.Position
+    local rayDirection = Vector3.new(0, -100, 0)
+        
+    local raycastParams = RaycastParams.new()
+    raycastParams.FilterDescendantsInstances = target.Parent:GetDescendants()
+    raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+
+    local raycastResult = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
+    strikePosition = raycastResult.Position
+end
+
+game:GetService("Players").PlayerAdded:Connect(function(player)
+   table.insert(playerList, player) 
+end)
+
+game:GetService("Players").PlayerRemoving:Connect(function(player)
+   table.remove(playerList, table.find(playerList, player)) 
+end)
+
+local RunService = game:GetService("RunService")
 
 -- Handles the GUI and calls the functions for each command
 function commandLineHandler(text) 
@@ -632,9 +724,6 @@ function commandLineHandler(text)
                 "Scroll commands:"
             })
         end
-    elseif command[1]:lower() == "aimbot" then 
-        -- WORK ON LATER
-        print("LATER")
     elseif command[1]:lower() == "hitbox" then 
         if command[2] ~= nil and command[2] == "extend" then 
             local playerName = command[3]
@@ -686,6 +775,65 @@ function commandLineHandler(text)
                 "Hitbox commands:"
             })
         end
+    elseif command[1]:lower() == "aimbot" then 
+        if command[2] ~= nil and command[2]:lower() == "toggle" then
+            aimbot = not aimbot
+            if aimbot then 
+               RunService:BindToRenderStep("Aimbot", 1, findTarget)
+            else 
+                targetSelectionBox.Adornee = nil
+                targetSelectionBox.Parent = nil
+                target = nil 
+                oldTarget = nil 
+                RunService:UnbindFromRenderStep("Aimbot")
+            end
+        elseif command[2] ~= nil and command[2]:lower() == "target" then 
+            local playerName = command[3]
+            local player = workspace:FindFirstChild(playerName)
+            if not player then 
+                for _,v in pairs(game:GetService("Players"):GetChildren()) do 
+                    if v.Name:lower():find('^'..playerName:lower()) then 
+                       player = v 
+                    end
+                end 
+            end
+            if player then 
+                RunService:UnbindFromRenderStep("Aimbot")
+                target = player.Character:FindFirstChild("UpperTorso")
+                targetSelectionBox.Adornee = target 
+                targetSelectionBox.Parent = target
+                MultipleWrite({
+                    "Do target toggle to stop targeting",
+                    "targeting: " .. player.Name
+                })
+            else 
+                Write("Player not found.")
+            end
+        end
+    elseif command[1]:lower() == "hide" then 
+        -- Hide the gui 
+        MainFrame.Visible = false 
+        -- Clear the logs 
+        clearLog()
+        -- Set stamina to normal 
+        player.PlayerData.Stats.Stamina.Value = normalPlayerStam 
+        -- Set health to normal
+        if normalPlayerHealth ~= nil then
+            player.PlayerGui.MainMenu.HealthFrame.Title.Text = "HEALTH ("..tostring(normalPlayerHealth).."/"..tostring(normalPlayerHealth)
+        end
+        -- Toggle aimbot off 
+        if aimbot then aimbot = false end 
+        targetSelectionBox.Adornee = nil 
+        targetSelectionBox.Parent = nil 
+        -- Toggle hitbox extenders off 
+        for _,v in ipairs(game:GetService("Players"):GetChildren()) do 
+           local character = v.Character 
+           local hrp = character:FindFirstChild("HumanoidRootPart")
+           if hrp then
+              local box = hrp:FindFirstChild("xuz")
+              if box then box:Destroy() end
+           end
+        end
     end
 end
 
@@ -704,8 +852,14 @@ local commands = {
     "avatar default",
     "scroll status",
     "scroll find",
-    "hitbox extend [name]",
-    "hitbox size [number]"
+    "hitbox extend [name/all]",
+    "hitbox size [number]",
+    "aimbot toggle",
+    "aimbot target [name]",
+    "aimbot filter [move or playername]",
+    "aimbot moves",
+    "aimbot players",
+    "hide",
 }
 
 -- Command guide while typing
