@@ -9,7 +9,8 @@ local ANNOUNCMENT = {
     "You can now turn off extenders",
     "Using hitbox extend none",
     "Players who join/respawn will extend",
-    "Many other fixes were made."
+    "Many other fixes were made.",
+    "Run: commands for a list of commands"
 }
 
 -- Flip announcment
