@@ -2,10 +2,6 @@
 
 -- There are only 4 colors. White Red Green Blue and Black
 
-_G.EarwaxSettings = {
-    ErrorColor = "White"
-}
-
 local ANNOUNCMENT = {
     "Earwax Revamped",
     "V 2.0",
