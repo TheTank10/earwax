@@ -692,6 +692,93 @@ function HITBOX(args)
     end
 end
 
+local function CutCoins(amount)
+    local money = player.PlayerData.Stats.Money5
+    local inventory = player.PlayerData.Inventory
+    
+    while money.Value > amount do 
+        local ohString1 = "Buy"
+        local ohTable2 = {
+        	["ItemType"] = 1,
+        	["ItemName"] = "DualHooks"
+        }
+        game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(ohString1, ohTable2)
+        
+        local slot = ""
+        
+        for _, v in pairs(inventory:GetChildren()) do 
+            if v.Value == "DualHooks" then 
+               slot = v.Name
+               break
+            end
+        end
+        
+        local ohString1 = "DeleteItem"
+        local ohTable2 = {
+        	["Slot"] = slot
+        }
+        game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(ohString1, ohTable2)
+    end
+end
+
+function COIN(args)
+    --[[
+        Handles cutting coins
+    --]]
+    if args[2] ~= nil and args[2]:lower() == "cut" then 
+       local amount = tonumber(args[3])
+       
+        if amount ~= nil then 
+           CutCoins(amount)
+        else 
+            Write({"coin cut needs a valid number"}, _G.EarwaxSettings.ErrorColor)
+        end
+    end
+end
+
+function SPECTATE(args)
+    --[[
+        Function is used to spectate players
+    --]]
+    if args[2] ~= nil and args[2]:lower() == "stop" then
+        local currentSpectator = workspace.CurrentCamera.CameraSubject.Parent
+        
+        for _,v in pairs(currentSpectator.HumanoidRootPart:GetChildren()) do 
+            if v.Name == "xuz" then 
+               v.Visible = adornee
+            end
+        end
+        
+        workspace.CurrentCamera.CameraSubject = player.Character.Humanoid
+    else 
+        local playerName = args[2]
+        
+        if playerName == nil then 
+            Write({"spectate requires a valid player name"}, _G.EarwaxSettings.ErrorColor)
+            return
+        end
+        
+        local currentSpectator = workspace.CurrentCamera.CameraSubject.Parent
+        for _,v in pairs(currentSpectator.HumanoidRootPart:GetChildren()) do 
+            if v.Name == "xuz" then 
+               v.Visible = adornee
+            end
+        end
+        
+        local player = findPlayer(playerName)
+        local character = player.Character or player.CharacterAdded:Wait()
+        local hrp = character:WaitForChild("HumanoidRootPart")
+        
+        for _,v in pairs(hrp:GetChildren()) do 
+            if v.Name == "xuz" then 
+               v.Visible = false
+            end
+        end
+        
+        workspace.CurrentCamera.CameraSubject = character.Humanoid
+    end
+end
+
 local function ScaleToOffset(Scale)
 	local ViewPortSize = workspace.Camera.ViewportSize
 	return ({ViewPortSize.X * Scale[1],ViewPortSize.Y * Scale[2]})
@@ -720,20 +807,23 @@ local function decreaseHealthIndicator(player)
     nametag.Size = UDim2.new(10, 0, 2, 0)
 end
 
-local events = {}
+local miscEvents = {}
 local healthToggle = false
 function MISC(args)
-    if args[2] ~= nil and args[2] == "health" then
+    --[[
+        Misc functions
+    --]]
+    if args[2] ~= nil and args[2]:lower() == "health" then
         healthToggle = not healthToggle 
         if healthToggle then
             for _,v in pairs(game:GetService("Players"):GetPlayers()) do 
                 spawn(function()
                    increaseHealthIndicator(v) 
                 end)
-                events[#events+1] = v.CharacterAdded:Connect(function()
+                miscEvents[#miscEvents+1] = v.CharacterAdded:Connect(function()
                     increaseHealthIndicator(v)
                 end)
-                events[#events+1] = game:GetService("Players").PlayerAdded:Connect(function(player)
+                miscEvents[#miscEvents+1] = game:GetService("Players").PlayerAdded:Connect(function(player)
                     increaseHealthIndicator(v)
                 end)
             end
@@ -742,7 +832,7 @@ function MISC(args)
                 spawn(function()
                     decreaseHealthIndicator(v)
                 end)
-                for _,v in pairs(events) do 
+                for _,v in pairs(miscEvents) do 
                     if v then 
                        v:Disconnect()
                     end
@@ -791,6 +881,8 @@ local commands = {
     avatar = {AVATAR, "avatar copy [player]", "avatar default"},
     scroll = {SCROLL, "scroll status", "scroll find"}, 
     hitbox = {HITBOX, "hitbox extend all", "hitbox extend none", "hitbox extend [player]", "hitbox size [number]", "hitbox adornee"},
+    coin = {COIN, "coin cut [amount]"},
+    spectate = {SPECTATE, "spectate [player]", "spectate stop"},
     misc = {MISC, "misc health"},
     hide = {HIDE, "hide"}
 }
