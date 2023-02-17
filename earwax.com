@@ -797,6 +797,8 @@ local function increaseHealthIndicator(player)
     local scaleX = nametag.Size.X.Scale 
     local scaleY = nametag.Size.Y.Scale 
     local offset = ScaleToOffset({scaleX, scaleY})
+    
+    nametag.AlwaysOnTop = true
     nametag.Size = UDim2.new(0, offset[1]/100, 0, offset[2]/100)
 end
 
@@ -804,6 +806,8 @@ local function decreaseHealthIndicator(player)
     local character = player.Character or player.CharacterAdded:Wait()
     local nametag = character:WaitForChild("Head"):WaitForChild("Nametag")
     nametag.MaxDistance = 100 
+    
+    nametag.AlwaysOnTop = false
     nametag.Size = UDim2.new(10, 0, 2, 0)
 end
 
@@ -823,10 +827,10 @@ function MISC(args)
                 miscEvents[#miscEvents+1] = v.CharacterAdded:Connect(function()
                     increaseHealthIndicator(v)
                 end)
-                miscEvents[#miscEvents+1] = game:GetService("Players").PlayerAdded:Connect(function(player)
-                    increaseHealthIndicator(v)
-                end)
             end
+            miscEvents[#miscEvents+1] = game:GetService("Players").PlayerAdded:Connect(function(player)
+                increaseHealthIndicator(player)
+            end)
         else 
             for _,v in pairs(game:GetService("Players"):GetPlayers()) do 
                 spawn(function()
