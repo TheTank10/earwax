@@ -2,6 +2,10 @@
 
 -- There are only 4 colors. White Red Green Blue and Black
 
+_G.EarwaxSettings = {
+    ErrorColor = "White"
+}
+
 local ANNOUNCMENT = {
     "Earwax Revamped",
     "V 2.0",
@@ -688,6 +692,66 @@ function HITBOX(args)
     end
 end
 
+local function ScaleToOffset(Scale)
+	local ViewPortSize = workspace.Camera.ViewportSize
+	return ({ViewPortSize.X * Scale[1],ViewPortSize.Y * Scale[2]})
+end
+
+
+local function OffsetToScale(Offset)
+	local ViewPortSize = workspace.Camera.ViewportSize
+	return ({Offset[1] / ViewPortSize.X, Offset[2] / ViewPortSize.Y})
+end
+
+local function increaseHealthIndicator(player)
+    local character = player.Character or player.CharacterAdded:Wait()
+    local nametag = character:WaitForChild("Head"):WaitForChild("Nametag")
+    nametag.MaxDistance = 20000 
+    local scaleX = nametag.Size.X.Scale 
+    local scaleY = nametag.Size.Y.Scale 
+    local offset = ScaleToOffset({scaleX, scaleY})
+    nametag.Size = UDim2.new(0, offset[1]/100, 0, offset[2]/100)
+end
+
+local function decreaseHealthIndicator(player)
+    local character = player.Character or player.CharacterAdded:Wait()
+    local nametag = character:WaitForChild("Head"):WaitForChild("Nametag")
+    nametag.MaxDistance = 100 
+    nametag.Size = UDim2.new(10, 0, 2, 0)
+end
+
+local events = {}
+local healthToggle = false
+function MISC(args)
+    if args[2] ~= nil and args[2] == "health" then
+        healthToggle = not healthToggle 
+        if healthToggle then
+            for _,v in pairs(game:GetService("Players"):GetPlayers()) do 
+                spawn(function()
+                   increaseHealthIndicator(v) 
+                end)
+                events[#events+1] = v.CharacterAdded:Connect(function()
+                    increaseHealthIndicator(v)
+                end)
+                events[#events+1] = game:GetService("Players").PlayerAdded:Connect(function(player)
+                    increaseHealthIndicator(v)
+                end)
+            end
+        else 
+            for _,v in pairs(game:GetService("Players"):GetPlayers()) do 
+                spawn(function()
+                    decreaseHealthIndicator(v)
+                end)
+                for _,v in pairs(events) do 
+                    if v then 
+                       v:Disconnect()
+                    end
+                end
+            end
+        end
+    end
+end
+
 function HIDE()
     --[[
         Function used to hide the exploits
@@ -727,6 +791,7 @@ local commands = {
     avatar = {AVATAR, "avatar copy [player]", "avatar default"},
     scroll = {SCROLL, "scroll status", "scroll find"}, 
     hitbox = {HITBOX, "hitbox extend all", "hitbox extend none", "hitbox extend [player]", "hitbox size [number]", "hitbox adornee"},
+    misc = {MISC, "misc health"},
     hide = {HIDE, "hide"}
 }
 
@@ -776,10 +841,7 @@ CommandLine:GetPropertyChangedSignal("Text"):Connect(function()
             end
         end
     end
-    
-    
     Write(board, "White")
-    
 end)
 
 local function onFocusLost(enterPressed, inputThatCausedFocusLost)
