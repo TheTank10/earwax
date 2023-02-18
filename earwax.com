@@ -1,11 +1,3 @@
--- EARWAX --
-
--- There are only 4 colors. White Red Green Blue and Black
-
-_G.EarwaxSettings = {
-    ErrorColor = "White"
-}
-
 local ANNOUNCMENT = {
     "Earwax Revamped",
     "V 2.0",
@@ -736,6 +728,76 @@ function COIN(args)
     end
 end
 
+local function setInventoryFrame(player)
+    local slots = game:GetService("Players").LocalPlayer.PlayerGui.MainMenu.StatFrame.InventoryFrame.InventorySlots
+    local items = game:GetService("ReplicatedStorage").ItemsFolder
+    local playerInventory = player.PlayerData.Inventory
+    local equipped = player.PlayerData.Equipped
+    local equippedFrame =  game:GetService("Players").LocalPlayer.PlayerGui.MainMenu.StatFrame.InventoryFrame.EquippedSlots
+    
+    for _,v in pairs(slots:GetChildren()) do 
+        if v.Name ~= "UIGridLayout" then 
+            v.Image = ""
+        end
+    end 
+    
+    for _,v in pairs(equippedFrame:GetChildren()) do 
+        if v.Name ~= "UIGridLayout" then 
+            v.Image = ""
+            v.TextLabel.Visible = true
+        end
+    end
+    
+    for _,v in pairs(playerInventory:GetChildren()) do 
+        local itemName = v.Value
+       
+        if itemName ~= "" then
+            local slot = v.Name 
+            local image = items[itemName].AssetId.Value 
+            local image = "http://www.roblox.com/Game/Tools/ThumbnailAsset.ashx?fmt=png&wd=110&ht=110&aid="..tostring(image)
+           
+            for _,v in pairs(equipped:GetChildren()) do
+                if v.Value == slot then 
+                   local name = v.Name 
+                   equippedFrame[name].Image = image
+                   equippedFrame[name].TextLabel.Visible = false
+                end
+            end
+
+            slots[slot].Image = image
+        end
+    end
+end
+
+local elementColors = {Fire = Color3.new(255, 0, 0), Water = Color3.new(0, 0, 255), Earth = Color3.new(0, 255, 0), Air = Color3.new(100, 100, 100), None = Color3.new(0,0,0)}
+local function spectatePlayer(player)
+    local character = player.Character
+    local statsFrame = game:GetService("Players").LocalPlayer.PlayerGui.MainMenu.StatFrame
+    local element = player.PlayerData.Appearance.Elements.Value 
+    local elementColor = elementColors[element]
+    local level = player.PlayerData.Stats.Level.Value
+    local pieces = player.PlayerData.Stats.Money5.Value
+    local skillPoints = player.PlayerData.Stats.SkillPoints.Value
+    local strength = player.PlayerData.Stats.Strength.Value
+    local defense = player.PlayerData.Stats.Defense.Value
+    local stamina = player.PlayerData.Stats.Stamina.Value
+    
+    -- Setting the stats frame
+    statsFrame.Level.TextColor3 = elementColor
+    statsFrame.Level.Text = "LEVEL " .. tostring(level)
+    statsFrame.Element.TextColor3 = elementColor
+    statsFrame.Element.Text = element
+    statsFrame.Pieces.Amount.Text = tostring(pieces)
+    statsFrame.StatsFrame.SkillPoints.Amount.Text = tostring(skillPoints)
+    statsFrame.StatsFrame.Strength.Amount.Text = tostring(strength)
+    statsFrame.StatsFrame.Defense.Amount.Text = tostring(defense)
+    statsFrame.StatsFrame.Stamina.Amount.Text = tostring(stamina)
+    
+    setInventoryFrame(player)
+    
+    workspace.CurrentCamera.CameraSubject = character.Humanoid
+end 
+
 function SPECTATE(args)
     --[[
         Function is used to spectate players
@@ -749,12 +811,13 @@ function SPECTATE(args)
             end
         end
         
-        workspace.CurrentCamera.CameraSubject = player.Character.Humanoid
+        spectatePlayer(player)
+        copyKeybinds(player) 
     else 
         local playerName = args[2]
         
         if playerName == nil then 
-            Write({"spectate requires a valid player name"}, _G.EarwaxSettings.ErrorColor)
+            Write({"spectate stop", "spectate [player]", "spectate commands:"}, "White")
             return
         end
         
@@ -766,16 +829,22 @@ function SPECTATE(args)
         end
         
         local player = findPlayer(playerName)
-        local character = player.Character or player.CharacterAdded:Wait()
-        local hrp = character:WaitForChild("HumanoidRootPart")
         
-        for _,v in pairs(hrp:GetChildren()) do 
-            if v.Name == "xuz" then 
-               v.Visible = false
+        if player then
+            local character = player.Character or player.CharacterAdded:Wait()
+            local hrp = character:WaitForChild("HumanoidRootPart")
+            
+            for _,v in pairs(hrp:GetChildren()) do 
+                if v.Name == "xuz" then 
+                   v.Visible = false
+                end
             end
+            
+            spectatePlayer(player)
+            copyKeybinds(player) 
+        else 
+            Write({"spectate requires a valid player"}, _G.EarwaxSettings.ErrorColor)
         end
-        
-        workspace.CurrentCamera.CameraSubject = character.Humanoid
     end
 end
 
@@ -783,7 +852,6 @@ local function ScaleToOffset(Scale)
 	local ViewPortSize = workspace.Camera.ViewportSize
 	return ({ViewPortSize.X * Scale[1],ViewPortSize.Y * Scale[2]})
 end
-
 
 local function OffsetToScale(Offset)
 	local ViewPortSize = workspace.Camera.ViewportSize
@@ -829,7 +897,9 @@ function MISC(args)
                 end)
             end
             miscEvents[#miscEvents+1] = game:GetService("Players").PlayerAdded:Connect(function(player)
-                increaseHealthIndicator(player)
+                miscEvents[#miscEvents+1] = player.CharacterAdded:Connect(function()
+                    increaseHealthIndicator(player)
+                end)
             end)
         else 
             for _,v in pairs(game:GetService("Players"):GetPlayers()) do 
