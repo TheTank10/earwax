@@ -1,6 +1,4 @@
-_G.EarwaxSettings = {
-    ErrorColor = "White"
-}
+
 
 local ANNOUNCMENT = {
     "Earwax Revamped",
