@@ -1,3 +1,7 @@
+_G.EarwaxSettings = {
+    ErrorColor = "White"
+}
+
 local ANNOUNCMENT = {
     "Earwax Revamped",
     "V 2.0",
@@ -1025,4 +1029,5 @@ UserInputService.InputBegan:Connect(function(input,isTyping) -- input is for the
 	    MainFrame.Visible = not MainFrame.Visible
 	end
 end)
+
 
