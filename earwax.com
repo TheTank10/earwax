@@ -538,7 +538,7 @@ end
 local adornee = true
 local function extendHitbox(player, size)
     local selectionBox
-    local _,_ = pcall(function()
+    spawn(function()
     local hrp = player.Character:FindFirstChild("HumanoidRootPart")
     if hrp == nil then return end 
     hrp.Size = Vector3.new(size, size, size)
