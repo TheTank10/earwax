@@ -124,6 +124,7 @@ function createGui(gui, action)
         
         for _,v in pairs(subButtons[name]) do 
             v:Destroy()
+	    print("destroyed")
         end
         
         subButtons[name] = {}
