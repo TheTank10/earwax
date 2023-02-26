@@ -1,0 +1,169 @@
+local player = game:GetService("Players").LocalPlayer 
+local normalStamina = player.PlayerData.Stats.Stamina.Value
+local mouse = player:GetMouse()
+local GUI = Instance.new("ScreenGui")
+GUI.Parent = game.CoreGui
+
+local buttons = {}
+local subButtons = {}
+
+local function mousePosition()
+   return mouse.x, mouse.y 
+end
+
+local function Button(text)
+    local button = Instance.new("TextButton")
+    button.Text = text 
+    button.Name = text
+    button.Size = UDim2.new(0.05, 0, 0.02, 0)
+    button.TextColor3 = Color3.new(255,255,255)
+    button.BackgroundTransparency = 1
+    button.TextXAlignment = 0
+    button.Visible = false
+    
+    table.insert(buttons, button)
+    button.Parent = GUI
+end
+
+local function subButton(text, name, callback)
+    local button = Instance.new("TextButton")
+    button.Text = text 
+    button.Name = text
+    button.Size = UDim2.new(0.05, 0, 0.02, 0)
+    button.TextColor3 = Color3.new(255,255,255)
+    button.BackgroundTransparency = 1
+    button.TextXAlignment = 0
+    button.Visible = false
+    
+    button.Parent = GUI
+    
+    local toggle = false
+    button.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then 
+            toggle = not toggle
+            
+            if toggle then 
+                button.TextColor3 = Color3.new(0, 255, 0)
+            else 
+                button.TextColor3 = Color3.new(255, 255, 255)
+            end
+            
+            callback(toggle)
+        end
+    end) 
+
+    table.insert(subButtons[name], button)
+end
+
+function handleButtons()
+    for _,v in pairs(buttons) do
+        local toggle = false
+        v.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                toggle = not toggle
+                
+                if toggle then
+                    for _, v in ipairs(buttons) do
+                        v.TextColor3 = Color3.new(255, 255, 255) 
+                        v.Text = string.gsub(v.Text, " >", "")
+                    end
+                    
+                    v.TextColor3 = Color3.new(0, 255, 0)
+                    v.Text = v.Text .. " >"
+                    
+                    local _SubButtons = subButtons[v.Name]
+                    local Y = 0
+                    
+                    for _,v in pairs(subButtons) do 
+                        for _,v in pairs(v) do 
+                           v.Visible = false 
+                        end
+                    end
+                    
+                    for i,v in pairs(_SubButtons) do
+                        if i == 1 then Y = buttons[1].Position.Y.Offset end 
+                        local x = buttons[1].Position.X.Offset + 70
+                    
+                        v.Position = UDim2.new(0, x, 0, Y)
+                        v.Visible = true
+                        
+                        Y = Y + 20
+                    end
+                else 
+                    for _, v in ipairs(buttons) do
+                        v.TextColor3 = Color3.new(255, 255, 255) 
+                        v.Text = string.gsub(v.Text, " >", "")
+                    end
+                    for _,v in pairs(subButtons) do 
+                        for _,v in pairs(v) do 
+                           v.Visible = false
+                        end
+                    end
+                end
+            end
+        end) 
+    end
+end
+
+function createGui(gui)
+    local Y = 0
+    for i,v in pairs(gui) do
+        local name = i
+        Button(i)
+        
+        subButtons[name] = {}
+        for i,v in pairs(v) do 
+            subButton(i, name, v)
+        end
+    end
+    handleButtons()
+end
+
+--[[
+    TOGGLES GUI ON AND OFF
+--]]
+local count = 0
+local threshHold = 2
+local clickTime = 0.2
+local toggle = false
+function onClick()
+	count = count + 1
+	
+	if count % threshHold == 0 then
+        toggle = not toggle
+        if toggle then
+            local Y = 0
+            local x, y = mousePosition()
+            for i,v in pairs(buttons) do 
+                if i == 1 then Y = y end 
+                v.Position = UDim2.new(0, x, 0, Y)
+                v.Visible = true
+                Y = Y + 20 
+            end
+        else 
+            for _,v in pairs(buttons) do
+                v.Visible = false
+                v.TextColor3 = Color3.new(255, 255, 255) 
+                v.Text = string.gsub(v.Text, " >", "")
+            end
+            for _,v in pairs(subButtons) do 
+                for _,v in pairs(v) do 
+                    v.Visible = false
+                end
+            end
+        end
+	end
+	
+	wait(clickTime)
+	count = count - 1
+end
+
+game:GetService("UserInputService").InputBegan:Connect(function(input, processed)
+    if processed then return end 
+    
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        onClick()
+    end
+end)
+
+return createGui
