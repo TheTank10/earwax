@@ -52,6 +52,7 @@ local function subButton(text, name, callback)
     end) 
 
     table.insert(subButtons[name], button)
+    return button
 end
 
 function handleButtons()
@@ -120,6 +121,10 @@ function createGui(gui, action)
     elseif action == "Update" then 
         local name = gui[1]
         local value = gui[2]
+        
+        for _,v in pairs(subButtons[name]) do 
+            v:Destroy()
+        end
         
         subButtons[name] = {}
         
