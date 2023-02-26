@@ -47,7 +47,7 @@ local function subButton(text, name, callback)
                 button.TextColor3 = Color3.new(255, 255, 255)
             end
             
-            callback(toggle)
+            callback(toggle, button)
         end
     end) 
 
@@ -166,3 +166,4 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, processed
 end)
 
 return createGui
+
