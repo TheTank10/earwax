@@ -104,18 +104,24 @@ function handleButtons()
     end
 end
 
-function createGui(gui)
-    local Y = 0
-    for i,v in pairs(gui) do
-        local name = i
-        Button(i)
-        
-        subButtons[name] = {}
-        for i,v in pairs(v) do 
-            subButton(i, name, v)
+function createGui(gui, action)
+    if action == "Create" then
+        local Y = 0
+        for i,v in pairs(gui) do
+            local name = i
+            Button(i)
+            
+            subButtons[name] = {}
+            for i,v in pairs(v) do 
+                subButton(i, name, v)
+            end
         end
+        handleButtons()
+    elseif action == "Update" then 
+        local name = gui[1]
+        local value = gui[2]
+        _SubButtons[name] = value
     end
-    handleButtons()
 end
 
 --[[
@@ -166,4 +172,3 @@ game:GetService("UserInputService").InputBegan:Connect(function(input, processed
 end)
 
 return createGui
-
