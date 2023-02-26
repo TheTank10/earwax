@@ -119,6 +119,7 @@ function createGui(gui, action)
         end
         handleButtons()
     elseif action == "Update" then 
+    	print("Udpate")
         local name = gui[1]
         local value = gui[2]
         
