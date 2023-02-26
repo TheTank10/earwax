@@ -120,7 +120,7 @@ function createGui(gui, action)
     elseif action == "Update" then 
         local name = gui[1]
         local value = gui[2]
-        _SubButtons[name] = value
+        subButtons[name] = value
     end
 end
 
