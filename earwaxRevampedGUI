@@ -119,19 +119,32 @@ function createGui(gui, action)
         end
         handleButtons()
     elseif action == "Update" then 
-    	print("Udpate")
         local name = gui[1]
         local value = gui[2]
         
+        local visible = subButtons[name][1].Visible
+        
         for _,v in pairs(subButtons[name]) do 
             v:Destroy()
-	    print("destroyed")
         end
         
         subButtons[name] = {}
         
         for i,v in pairs(value) do 
             subButton(i, name, v)
+        end
+        
+        if visible then 
+          local Y = 0
+          for i,v in pairs(subButtons[name]) do
+            if i == 1 then Y = buttons[1].Position.Y.Offset end 
+                local x = buttons[1].Position.X.Offset + 70
+                    
+                v.Position = UDim2.new(0, x, 0, Y)
+                v.Visible = true
+                        
+                Y = Y + 20
+            end
         end
     end
 end
