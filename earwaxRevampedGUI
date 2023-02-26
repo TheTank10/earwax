@@ -1,5 +1,4 @@
 local player = game:GetService("Players").LocalPlayer 
-local normalStamina = player.PlayerData.Stats.Stamina.Value
 local mouse = player:GetMouse()
 local GUI = Instance.new("ScreenGui")
 GUI.Parent = game.CoreGui
