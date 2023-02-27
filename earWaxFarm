@@ -133,9 +133,17 @@ function farm(toggle)
         if not farming then 
             farming = true
             while farming do 
+                if #farmList == 0 then 
+                    farming = false 
+                    return
+                end
                 for _,v in pairs(farmList) do 
                     doQuest(v)
-                    if not toggle then return end
+                    if #farmList == 0 then 
+                        farming = false 
+                        return
+                    end
+                    if not farming then return end
                 end
                 repeat wait() until farming == false or #farmList > 1
             end
