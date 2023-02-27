@@ -84,14 +84,14 @@ local function doQuest(quest)
     if npc:FindFirstChild("Sign") then
         repeat 
             wait() 
-        until (npc:FindFirstChild("Sign") and npc.Sign.Transparency == 0 and tick() - count > 3) or tick() - count > 4
+        until (npc:FindFirstChild("Sign") and npc.Sign.Transparency == 0 and tick() - count > 3) or tick() - count > 4 or farming == false
     else 
         wait(4)
     end
     
     repeat 
         wait()
-    until canFarm(npc)
+    until canFarm(npc) or farming == false
     
     if farming == false then 
         lock:Disconnect()
