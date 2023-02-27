@@ -1,0 +1,148 @@
+local player = game:GetService("Players").LocalPlayer
+local getCharacter = function() return player.Character end
+local mainMenu = player.PlayerGui:WaitForChild("MainMenu")
+local menuControlInstance = mainMenu:WaitForChild("MenuControl")
+local MenuControl = getsenv(menuControlInstance)
+local Quests = MenuControl.QuestModule
+local npcs = Quests.RefreshNPCs
+local npcList = debug.getupvalue(npcs, 3)
+local stepsList = {}
+local farming = false
+
+local function getNPC(quest)
+    for npc, _quest in pairs(npcList) do 
+        if _quest[1] == quest then 
+            return workspace["QuestNPCs"][npc][""]
+        end
+    end
+end
+
+for i,v in pairs(Quests) do 
+    local quest = i
+    if type(v) == "table" then 
+        for i,v in pairs(v) do 
+            if i == "Steps" then 
+                stepsList[quest] = #v+1
+            end
+        end
+    end
+end
+
+local function lockToNPC(npc)
+    local character = getCharacter()
+    local npcHrp = npc.HumanoidRootPart
+    
+    local _,_ = pcall(function()
+        if character.Head:FindFirstChild("Nametag") then character.Head:FindFirstChild("Nametag"):Destroy() end
+        if character:FindFirstChild("BattlerHealth") then character.BattlerHealth:Destroy() end
+    end)
+    
+    return game:GetService("RunService").Stepped:Connect(function()
+        local character = getCharacter()
+        local hrp = character:FindFirstChild("HumanoidRootPart") 
+        if hrp then
+            hrp.Velocity = Vector3.new(0, 0, 0)
+            hrp.CFrame = npc.PrimaryPart.CFrame * CFrame.new(0,8,0)
+        end
+    end)
+end
+
+local function canFarm(npc)
+    local character = getCharacter()
+    local hrp = character:FindFirstChild("HumanoidRootPart") 
+    if not hrp then return false end
+    local npcHrp = npc.HumanoidRootPart  
+    local distance = math.abs((hrp.Position - npcHrp.Position).Magnitude)
+    local humanoid = character:FindFirstChild("Humanoid")
+    if not humanoid then return false end 
+    local health = humanoid.Health
+    
+    local goodDistance = distance < 15 
+    local goodHealth = health > 0
+    
+    return goodDistance and goodHealth
+end
+
+local function deleteAvatar()
+    local character = getCharacter()
+    for _,v in pairs(character:GetDescendants()) do 
+        if v:IsA("Accessory") then 
+            v:Destroy()
+        end
+    end
+end
+
+local function doQuest(quest)
+    local npc = getNPC(quest)
+    local lock = lockToNPC(npc)
+    local steps = stepsList[quest]
+    local count = tick()
+    local cooldown = 3
+    
+    deleteAvatar()
+    
+    if npc:FindFirstChild("Sign") then
+        repeat 
+            wait() 
+        until (npc:FindFirstChild("Sign") and npc.Sign.Transparency == 0 and tick() - count > 3) or tick() - count > 4
+    else 
+        wait(4)
+    end
+    
+    repeat 
+        wait()
+    until canFarm(npc)
+    
+    if farming == false then 
+        lock:Disconnect()
+        local character = getCharacter()
+        character.Humanoid:Destroy()
+        return
+    end
+        
+    local questStr = "AdvanceStep"
+    local questTab = {
+        ["QuestName"] = quest,
+        ["Step"] = 0
+    }
+        
+    for i=0, steps do 
+        questTab.Step = i 
+        game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(questStr, questTab)
+        wait(0.5)
+    end
+    lock:Disconnect()
+end
+
+local farmList = {}
+
+function farm(toggle)
+    if toggle == "Get Quests" then 
+        local quests = {}
+        for _,v in pairs(npcList) do 
+            table.insert(quests, v[1])
+        end
+        return quests
+    elseif type(toggle) == "table" and toggle[1] == "Add Quest" then 
+        local quest = toggle[2]
+        table.insert(farmList, quest)
+    elseif type(toggle) == "table" and toggle[1] == "Remove Quest" then 
+        local quest = toggle[2]
+        table.remove(farmList, table.find(farmList, quest))
+    elseif toggle then 
+        if not farming then 
+            farming = true
+            while farming do 
+                for _,v in pairs(farmList) do 
+                    doQuest(v)
+                    if not toggle then return end
+                end
+                repeat wait() until farming == false or #farmList > 1
+            end
+        end
+    elseif toggle == false then 
+        farming = false
+    end
+end
+
+return farm
