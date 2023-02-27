@@ -106,7 +106,8 @@ local function doQuest(quest)
         ["Step"] = 0
     }
         
-    for i=0, steps do 
+    for i=0, steps do
+        deleteAvatar()
         questTab.Step = i 
         game:GetService("ReplicatedStorage").NetworkFolder.GameFunction:InvokeServer(questStr, questTab)
         wait(0.5)
