@@ -135,13 +135,17 @@ function farm(toggle)
             farming = true
             while farming do 
                 if #farmList == 0 then 
-                    farming = false 
+                    farming = false
+                    local character = getCharacter()
+                    character.Humanoid:Destroy()
                     return
                 end
                 for _,v in pairs(farmList) do 
                     doQuest(v)
                     if #farmList == 0 then 
-                        farming = false 
+                        farming = false
+                        local character = getCharacter()
+                        character.Humanoid:Destroy()
                         return
                     end
                     if not farming then return end
